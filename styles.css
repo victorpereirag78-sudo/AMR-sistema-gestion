@@ -1,0 +1,616 @@
+/* Estilos Generales */ 
+ body, html { 
+    height: 100%; 
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+    background-color: #f4f7fa; 
+    color: #333; 
+ } 
+
+ /* --- Pantalla de Login --- */ 
+ #login-container { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+    background: linear-gradient(180deg, rgb(1, 1, 170) 0%, rgb(71, 75, 71) 100%); 
+ } 
+ .login-box { 
+    padding: 40px; 
+    background: rgba(163, 161, 161, 0.9); 
+    border-radius: 10px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    width: 320px; 
+ } 
+ .login-box h2 { margin-bottom: 5px; color: black; } 
+ .login-box input { width: calc(100% - 20px); padding: 10px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 5px; } 
+ .login-box button { width: 100%; padding: 12px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; } 
+
+ /* --- App Principal --- */ 
+ #app-container { display: flex; flex-direction: column; height: 100vh; } 
+
+ /* --- Cabecera y Menú Horizontal --- */ 
+ #main-header { display: flex; justify-content: space-between; align-items: center; background-color: #003366; color: white; padding: 0 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0; } 
+ #main-nav button { background: none; border: none; color: white; padding: 15px 20px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; } 
+ #main-nav button:hover, #main-nav button.active { background-color: #004494; } 
+
+ /* --- Contenedor (Sidebar + Contenido) --- */ 
+ #content-wrapper { display: flex; flex-grow: 1; overflow: hidden; } 
+ #sidebar { width: 240px; background-color: #004080; color: white; padding: 15px; flex-shrink: 0; overflow-y: auto; } 
+ #sidebar .submenu { display: none; } 
+ #sidebar .submenu.active { display: block; } 
+ #sidebar h2 { font-size: 1.1em; border-bottom: 1px solid #0056b3; padding-bottom: 10px; margin-top: 0; margin-bottom: 15px; } 
+ #sidebar ul { list-style: none; padding: 0; margin: 0; } 
+ #sidebar ul li button { width: 100%; text-align: left; background: none; border: none; color: #e0e0e0; padding: 12px 10px; cursor: pointer; font-size: 14px; border-radius: 4px; transition: background-color 0.2s, color 0.2s; } 
+ #sidebar ul li button:hover { background-color: #0056b3; color: #ffffff; } 
+ .submenu-group-title { font-size: 0.8em; text-transform: uppercase; color: #a0c0e0; margin: 20px 0 8px 5px; font-weight: bold; } 
+
+ /* --- Área de Contenido Principal --- */ 
+    #main-content { flex-grow: 1; padding: 30px; overflow-y: auto; background-color: #f9fbfd; } 
+    .content-panel { display: none; } 
+    .content-panel.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+ /* --- Estilos para Formularios --- */ 
+    .form-container { background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); max-width: 700px; } 
+    .form-group { margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; } 
+    .form-group label { flex-basis: 160px; margin-right: 15px; font-size: 0.95em; color: #444; font-weight: 600; } 
+    .form-group input[type="text"], .form-group input[type="date"], .form-group input[type="email"], .form-group select, .form-group textarea { flex-grow: 1; max-width: 320px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; transition: border-color 0.3s, box-shadow 0.3s; } 
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #007bff; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); } 
+    .form-group input.valid { border-color: #28a745; box-shadow: 0 0 0 3px rgba(40,167,69,0.1); } 
+    .form-group input.invalid { border-color: #dc3545; box-shadow: 0 0 0 3px rgba(220,53,69,0.1); } 
+    .form-group textarea { min-height: 80px; resize: vertical; } 
+    .form-group button { margin-left: 175px; padding: 10px 24px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; } 
+    .form-group button:hover { background-color: #0056b3; } 
+
+ /* ===== SECCIÓN DE FILTROS CORREGIDA ===== */
+    .grid-filtros {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    }
+
+    .filtros-container {
+    background-color: #003366;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.filtro-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los filtros pasen a la siguiente línea si no caben */
+    gap: 15px; /* Espacio entre cada filtro */
+    align-items: center; /* Alinea verticalmente label e input */
+}
+
+.filtro-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 140px;
+    max-width: 200px; /* Opcional: evita que se hagan muy anchos */
+}
+
+/*Filtro letras filtros*/
+.filtro-label {
+    font-weight: 600;
+    align-items: center;
+    color: white;
+    font-size: 0.9em;
+    margin-bottom: 50px; /* Eliminamos margen inferior */
+    white-space: nowrap; /* Evita que el texto de la etiqueta se parta */
+}
+.filtro-item {
+    padding: 8px 10px; /* Hacemos los inputs más angostos verticalmente */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%; /* El input ocupa el espacio disponible en el wrapper */
+    box-sizing: border-box; /* Importante para que el padding no desborde el ancho */
+}
+.filtro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+.filtro-buscar {
+    flex-grow: 1; /* El campo de búsqueda ocupa el mayor espacio */
+    min-width: 250px;
+}
+.filtro-buscar input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn-reset, .btn-excel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+/* Etiquetas */
+.filtro-wrapper label,
+.filtro-buscar label {
+  font-weight: 600;
+  color: white;
+  font-size: 0.85em;
+}
+
+/* Inputs y selects */
+.filtro-item,
+.filtro-buscar input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filtro-item:focus,
+.filtro-buscar input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+/* Fila inferior */
+.filtro-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.filtro-buscar {
+  flex-grow: 1;
+}
+
+.filtro-botones {
+  display: flex;
+  gap: 10px;
+}
+.btn-reset { background-color: #6c757d; color: white; }
+.btn-reset:hover { background-color: #5a6268; }
+.btn-excel { background-color: #28a745; color: white; }
+.btn-excel:hover { background-color: #218838; }
+
+ /* --- Tablas y Paginación --- */ 
+ .tabla-container { overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; } 
+ table { width: 100%; border-collapse: collapse; min-width: 800px; } 
+ th, td { padding: 12px 10px; border-bottom: 1px solid #eee; text-align: left; white-space: nowrap; font-size: 0.9em; } 
+ table thead { position: sticky; top: 0; z-index: 10; }
+ table th { background-color: #002244; color: white; font-weight: 600; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
+ #paginacion { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 8px; } 
+ #paginacion button { padding: 8px 14px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; transition: all 0.2s; } 
+ #paginacion button:hover:not(.active) { background-color: #f0f0f0; } 
+ #paginacion button.active { background-color: #007bff; color: white; border-color: #007bff; } 
+
+ /* --- Paneles de Búsqueda y Otros --- */ 
+ .resultado-busqueda { margin-top: 20px; padding: 15px; background-color: #e9f7fd; border: 1px solid #b3e0f2; border-radius: 8px; } 
+ #toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; } 
+ .toast { padding: 14px 20px; border-radius: 8px; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.2); animation: slideIn 0.3s ease-out forwards; max-width: 320px; } 
+ .toast.success { background-color: #28a745; } 
+ .toast.error { background-color: #dc3545; } 
+ @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+ .estado-btn { padding: 6px 12px; border: none; border-radius: 20px; color: white; font-weight: 600; font-size: 0.85em; }
+ .estado-btn.finalizado { background-color: #28a745; }
+ .estado-btn.rechazado { background-color: #dc3545; }
+
+ /* --- Estilos para el Formulario de Nuevo Personal (RRHH) --- */
+.form-grid {
+    display: grid;
+    /* Crea dos columnas de tamaño flexible */
+    grid-template-columns: repeat(2, 1fr);
+    /* Espacio entre las filas y columnas del grid */
+    gap: 15px 25px; 
+}
+
+/* Hace que un campo ocupe todo el ancho (las 2 columnas) */
+.form-grid .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Ajustes para alinear el label y el input dentro del grid */
+.form-grid .form-group {
+    margin-bottom: 0; /* Quitamos el margen que ya no necesitamos */
+    flex-direction: column; /* Ponemos el label arriba del input */
+    align-items: flex-start;
+}
+
+.form-grid .form-group label {
+    margin-bottom: 6px; /* Pequeño espacio entre label e input */
+    margin-right: 0;
+    flex-basis: auto;
+}
+
+.form-grid .form-group input,
+.form-grid .form-group select,
+.form-grid .form-group textarea {
+    width: 100%; /* El input ocupa todo el ancho de su columna */
+    max-width: none;
+}
+
+/* Estilo para el switch de "Activo" */
+.switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: #28a745; }
+input:checked + .slider:before { transform: translateX(22px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* --- Estilos para Listas de Gestión (Cargos / Dptos) --- */
+.lista-gestion {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+.lista-gestion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.lista-gestion-item span {
+    font-weight: 500;
+}
+
+.btn-eliminar {
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333;
+}
+
+/* styles.css */
+
+.btn-email, .btn-wsp {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: white;
+}
+.btn-email { background-color: #007bff; }
+.btn-email:hover { background-color: #0069d9; }
+.btn-wsp { background-color: #25D366; }
+.btn-wsp:hover { background-color: #1EBE57; }
+
+/* Menú desplegable de estado */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .btn-estado {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown:hover .btn-estado {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed; /* en vez de absolute */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.tabla-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 10px;
+    position: relative; /* Para que el z-index funcione */
+    z-index: 1; /* Baja su prioridad */
+}
+
+/* ===== Filtros del Panel de Reportes de Producción ===== */
+
+.filtros-reportes {
+    display: flex;       /* ¡La magia! Pone los elementos hijos (los divs de cada filtro) en una fila. */
+    flex-wrap: wrap;     /* Si no caben en la pantalla, permite que pasen a la línea de abajo. */
+    gap: 16px;           /* Espacio horizontal y vertical entre cada elemento del filtro. */
+    align-items: flex-end; /* Alinea todos los elementos en su base, para que los botones se vean bien junto a los inputs. */
+    padding-bottom: 20px; /* Un poco de espacio extra abajo. */
+    margin-bottom: 20px;  /* Separa los filtros del gráfico. */
+    border-bottom: 1px solid #eee; /* Una línea divisoria sutil para separar. */
+}
+
+/* Estilo para cada grupo (label + input) dentro de los filtros */
+.filtros-reportes > div {
+    display: flex;
+    flex-direction: column; /* Mantiene la etiqueta arriba del input/select. */
+    gap: 6px;               /* Pequeño espacio entre la etiqueta y el campo. */
+}
+
+.filtros-reportes label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #555;
+}
+
+.filtros-reportes select,
+.filtros-reportes input,
+.filtros-reportes button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.filtros-reportes button {
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: #6c757d; /* Color base para botones (gris) */
+    transition: background-color 0.2s;
+}
+.filtros-reportes button:hover {
+    background-color: #5a6268;
+}
+
+/* Mantenemos el color verde para el botón de exportar */
+.filtros-reportes button.btn-excel {
+    background-color: #28a745; 
+}
+.filtros-reportes button.btn-excel:hover {
+    background-color: #218838;
+}
+
+/* ===== Layout para Gráfico y Tabla en Reportes ===== */
+.reportes-layout {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.grafico-container {
+    flex: 1 1 35%;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabla-container-reporte {
+    flex: 1 1 65%;
+}
+
+#tabla-dinamica-produccion {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* Responsive: en pantallas pequeñas se apilan */
+@media (max-width: 1024px) {
+    .reportes-layout {
+        flex-direction: column;
+    }
+    .grafico-container, .tabla-container-reporte {
+        flex: 1 1 100%;
+    }
+}
+
+/* === Estilos para Logística === */
+.mt-3 { margin-top: 20px; }
+.lista-seriados-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+.lista-seriados-item input {
+    flex: 1;
+}
+
+#modulo-bienvenida {
+    transition: opacity 0.3s ease;
+}
+#imagen-modulo {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Estilos del switch (ya lo tienes, pero asegúrate de que no tenga width 100% */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #28a745;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Texto "Activo" al lado del switch */
+.switch span {
+    margin-left: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ✅ ESTILOS CORREGIDOS PARA LA TABLA DE PERSONAL */
+#tabla-personal .acciones-celda {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+    min-height: 36px;
+}
+
+#tabla-personal .acciones-celda .btn-editar {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border: 1px solid #ccc;
+    background: #f8f9fa;
+    color: #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+#tabla-personal .acciones-celda .btn-editar:hover {
+    background: #e9ecef;
+    color: #0056b3;
+}
+
+/* Switch alineado en la misma fila */
+#tabla-personal .acciones-celda .switch {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+}
+
+/* Texto "Activo" al lado del switch */
+#tabla-personal .acciones-celda .estado-texto {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+
+/* Asegurar que el contenedor de la celda no colapse */
+#tabla-personal td:last-child {
+    min-width: 180px;
+    text-align: center;
+}
+
+:root {
+  --color-primary: #003366;
+  --color-primary-dark: #002244;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-gray: #6c757d;
+  --border-radius: 8px;
+  --spacing-md: 15px;
+  --spacing-lg: 30px;
+}
+
+@media (max-width: 768px) {
+  #sidebar { width: 200px; }
+  .form-group label { flex-basis: 120px; }
+  .grid-filtros { grid-template-columns: repeat(2, 1fr); }
+}
+
+.btn-link-orden {
+    background: none;
+    border: none;
+    color: rgb(74, 72, 72); /* Color azul para que parezca link */
+    cursor: pointer;
+    font-weight: bold;
+    
+    font-size: 1em;
+}
+.btn-link-orden:hover {
+    color: #0056b3;
+}
