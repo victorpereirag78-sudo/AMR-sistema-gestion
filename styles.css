@@ -597,9 +597,9 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 768px) {
-  #sidebar { width: 200px; }
-  .form-group label { flex-basis: 120px; }
-  .grid-filtros { grid-template-columns: repeat(2, 1fr); }
+#sidebar { width: 200px; }
+.form-group label { flex-basis: 120px; }
+.grid-filtros { grid-template-columns: repeat(2, 1fr); }
 }
 
 .btn-link-orden {

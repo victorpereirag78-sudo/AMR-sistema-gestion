@@ -71,7 +71,6 @@ function mostrarToast(mensaje, tipo = 'success') {
     contenedor.appendChild(toast);
     setTimeout(() => { toast.remove(); }, 4000);
 }
-
 // ==================================
 // --- Lógica de Login y Navegación ---
 // ==================================
@@ -148,7 +147,6 @@ function mostrarPanel(panelId) {
                     imgSrc = 'Osorno1.jpg';
                     titulo = 'Bienvenido a Tu Empresa';
             }
-
             if (imagenModulo) {
                 imagenModulo.src = imgSrc;
                 imagenModulo.style.opacity = imgSrc ? '1' : '0';
@@ -250,12 +248,9 @@ function validarNumeroOrden() {
 function validarCombinacion() {
     const numero = document.getElementById('orden-numero')?.value.trim();
     const regionId = document.getElementById('orden-region')?.value;
-
     if (!regionId) return mostrarToast("Seleccione una región.", "error");
-
     const sufijo = generarSufijoPorRegion(regionId);
     const numeroConSufijo = numero + sufijo;
-
     if (ordenes.some(o => o.numero === numeroConSufijo)) {
         return mostrarToast(`La orden ${numeroConSufijo} ya existe.`, "error");
     }
@@ -265,7 +260,6 @@ function validarCombinacion() {
     document.getElementById('orden-region').value = regionId;
     document.getElementById('orden-numero').disabled = true;
     document.getElementById('orden-region').disabled = true;
-
     const tituloIngreso = document.getElementById('titulo-ingreso-orden');
     if (tituloIngreso) {
         tituloIngreso.textContent = `Ingreso Orden: ${numeroConSufijo}`;
@@ -350,7 +344,6 @@ function resetFormularioOrden() {
         regionSelect.value = '';
         regionSelect.disabled = false;
     }
-
     const comunaSelect = document.getElementById('orden-comuna');
     const subServicioSelect = document.getElementById('orden-sub');
     if (comunaSelect) comunaSelect.innerHTML = '<option value="">-- Seleccione Comuna --</option>';
@@ -376,7 +369,6 @@ function guardarOrden(event) {
     const tecnico = document.getElementById('orden-tecnico')?.value;
     const despacho = document.getElementById('orden-despacho')?.value;
     const observacion = document.getElementById('orden-observacion')?.value.trim();
-
     if (!numero || !rut || !nombre || !direccion || !regionId || !comuna || !servicio || !subServicio || !fecha || !despacho) {
     return mostrarToast("Todos los campos marcados son obligatorios (excepto Técnico).", "error");
     }
@@ -384,7 +376,6 @@ function guardarOrden(event) {
     if (!esFechaFutura(fecha)) {
         return mostrarToast("La fecha de ingreso debe ser hoy o futura.", "error");
     }
-
     const nuevaOrden = {
         id: `orden-${Date.now()}`,
         numero,
@@ -402,7 +393,6 @@ function guardarOrden(event) {
         observacion,
         estado: 'Agendada'
     };
-
     ordenes.unshift(nuevaOrden);
     localStorage.setItem('ordenes', JSON.stringify(ordenes));
     mostrarToast(`Orden N° ${numero} guardada con éxito.`, "success");
@@ -415,7 +405,6 @@ function abrirEdicionOrden(ordenId) {
         mostrarToast("Error: No se encontró la orden.", "error");
         return;
     }
-
     document.getElementById('titulo-editar-orden').textContent = `Editar Orden`;
     document.getElementById('editar-orden-numero-display').textContent = orden.numero;
     document.getElementById('editar-orden-id').value = orden.id;
@@ -436,31 +425,26 @@ function abrirEdicionOrden(ordenId) {
         value: s,
         text: s
     })), "Seleccione Servicio");
-
     populateSelect(document.getElementById('editar-orden-tecnico'), appData.personal.tecnicos.map(t => ({ value: t, text: t })), "Seleccione Técnico");
     populateSelect(document.getElementById('editar-orden-despacho'), appData.personal.despacho.map(d => ({ value: d, text: d })), "Seleccione Despacho");
     const regionKey = Object.keys(appData.regiones).find(key => appData.regiones[key].nombre === orden.region);
     regionSelect.value = regionKey || "";
-    
     servicioSelect.value = orden.servicio;
     document.getElementById('editar-orden-tecnico').value = orden.tecnico;
     document.getElementById('editar-orden-despacho').value = orden.despacho;
     const comunaSelect = document.getElementById('editar-orden-comuna');
     cargarComunas(comunaSelect, regionSelect);
     comunaSelect.value = orden.comuna;
-
     const subServicioSelect = document.getElementById('editar-orden-sub');
     cargarSubServicio(subServicioSelect, servicioSelect);
     subServicioSelect.value = orden.subServicio;
     regionSelect.onchange = () => cargarComunas(comunaSelect, regionSelect);
     servicioSelect.onchange = () => cargarSubServicio(subServicioSelect, servicioSelect);
-    
     mostrarPanel('panel-editar-orden');
 }
 
 function guardarEdicionOrden(event) {
     event.preventDefault();
-
     const id = document.getElementById('editar-orden-id').value;
     const ordenIndex = ordenes.findIndex(o => o.id === id);
     if (ordenIndex === -1) {
@@ -493,7 +477,6 @@ function guardarEdicionOrden(event) {
         despacho: document.getElementById('editar-orden-despacho').value,
         observacion: document.getElementById('editar-orden-observacion').value.trim()
     };
-
     localStorage.setItem('ordenes', JSON.stringify(ordenes));
     mostrarToast("Orden actualizada con éxito.", "success");
     mostrarPanel('panel-agendadas');
@@ -505,21 +488,17 @@ function guardarEdicionOrden(event) {
 function renderTablaAgendadas(datos) {
     const tbody = document.querySelector("#tabla-agendadas tbody");
     if (!tbody) return;
-
     const datosParaMostrar = datos || ordenes.filter(o => o.estado === 'Agendada');
     tbody.innerHTML = "";
-
     if (datosParaMostrar.length === 0) {
         tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;">No se encontraron órdenes agendadas.</td></tr>`;
         const paginacion = document.getElementById("paginacion");
         if (paginacion) paginacion.innerHTML = "";
         return;
     }
-
     const inicio = (paginaActual - 1) * filasPorPagina;
     const fin = inicio + filasPorPagina;
     const datosPaginados = datosParaMostrar.slice(inicio, fin);
-
     datosPaginados.forEach(o => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -549,14 +528,12 @@ function renderTablaAgendadas(datos) {
             abrirEdicionOrden(btn.dataset.id);
         });
     });
-
     tbody.querySelectorAll('.btn-liquidar').forEach(btn => {
         btn.addEventListener('click', () => cambiarEstadoOrden(btn.dataset.id, "Liquidadas"));
     });
     tbody.querySelectorAll('.btn-rechazar').forEach(btn => {
         btn.addEventListener('click', () => abrirMotivoRechazo(btn.dataset.id));
     });
-
     const totalPaginas = Math.ceil(datosParaMostrar.length / filasPorPagina);
     const cont = document.getElementById("paginacion");
     if (cont) {
@@ -605,7 +582,6 @@ function aplicarFiltros() {
     const comuna = comunaEl?.value || '';
     const servicio = servicioEl?.value || '';
     const fecha = fechaEl?.value || '';
-
     let resultados = ordenes.filter(o => 
         o.estado === 'Agendada' &&
         (termino === '' || o.numero.toLowerCase().includes(termino) || o.rut.toLowerCase().includes(termino) || o.nombre.toLowerCase().includes(termino)) &&
@@ -643,14 +619,11 @@ function enviarPorCorreo() {
     if (!tecnicoFiltrado) return mostrarToast("Seleccione un técnico en los filtros.", "error");
     const tecnico = appData.empleados.find(emp => `${emp.nombre1} ${emp.apepaterno}` === tecnicoFiltrado && emp.activo);
     if (!tecnico || !tecnico.email) return mostrarToast(`No se encontró email para el técnico ${tecnicoFiltrado}.`, "error");
-
     const filas = document.querySelectorAll("#tabla-agendadas tbody tr");
     if (filas.length === 0 || filas[0].children.length < 2)
         return mostrarToast("No hay órdenes para enviar.", "error");
 
-    let cuerpo = `Hola ${tecnico.nombre1},
-Tienes las siguientes órdenes asignadas:
-`;
+    let cuerpo = `Hola ${tecnico.nombre1},Tienes las siguientes órdenes asignadas:`;
 
     filas.forEach((fila, index) => {
         const numero = fila.children[0].textContent;
@@ -660,7 +633,6 @@ Tienes las siguientes órdenes asignadas:
         const direccion = fila.children[5].textContent;
         const comuna = fila.children[6].textContent;
         const servicio = ordenes.find(o => o.numero === numero)?.servicio || '—';
-
         cuerpo += `${index + 1}. Orden #${numero}
     Fecha: ${fecha}
     Servicio: ${servicio}
@@ -668,19 +640,15 @@ Tienes las siguientes órdenes asignadas:
     Cliente: ${cliente}
     Dirección: ${direccion}
     Comuna: ${comuna}
-
-`;
+    `;
     });
-
     cuerpo += "Saludos.";
-
     const templateParams = {
         to_email: tecnico.email,
         to_name: tecnico.nombre1,
         subject: "Tus Órdenes de Trabajo – Sistema de Gestión",
         message: cuerpo
     };
-
     emailjs.send('service_8p2y4a6', 'template_m8313jl', templateParams)
         .then(() => {
             mostrarToast(`Correo enviado correctamente a ${tecnico.email}.`, "success");
@@ -690,7 +658,6 @@ Tienes las siguientes órdenes asignadas:
             mostrarToast("No se pudo enviar el correo. Revisar consola.", "error");
         });
 }
-
 
 function enviarPorWhatsapp() {
     const tecnicoFiltrado = document.getElementById('filtro-tecnico')?.value;
@@ -727,9 +694,7 @@ function enviarPorWhatsapp() {
 
 `;
     });
-
     mensaje += "¡Éxito en el terreno!";
-
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
 }
@@ -747,7 +712,6 @@ function buscarPorOrden() {
     resultadoDiv.innerHTML = orden ?
         `<p><strong>N° Orden:</strong> ${orden.numero}</p><p><strong>Cliente:</strong> ${orden.nombre}</p><p><strong>Estado:</strong> ${orden.estado}</p>` : `<p>Orden no encontrada.</p>`;
 }
-
 function buscarPorRut() {
     const input = document.getElementById('buscar-rut-input');
     const resultadoDiv = document.getElementById('resultado-rut');
@@ -787,23 +751,18 @@ function buscarColaborador() {
                 <p><strong>Email:</strong> ${emp.email || '—'}</p>
                 <p><strong>Dirección:</strong> ${emp.direccion || '—'}</p>
                 <p><strong>Región:</strong> ${emp.region || '—'}</p>
-            <p><strong>Comuna:</strong> ${emp.comuna || '—'}</p>
-        <p><strong>Fecha de Nacimiento:</strong> ${emp.fechaNacimiento || '—'}</p>
+                <p><strong>Comuna:</strong> ${emp.comuna || '—'}</p>
+                <p><strong>Fecha de Nacimiento:</strong> ${emp.fechaNacimiento || '—'}</p>
                 <p><strong>Cargo:</strong> ${cargo}</p>
-                
-                <p><strong>Fecha de Ingreso:</strong> ${emp.fechaIngreso ||
-'—'}</p>
-                <p><strong>Estado:</strong> ${emp.activo ?
-'✅ Activo' : '❌ Inactivo'}</p>
-                ${emp.observacion ?
-`<p><strong>Observaciones:</strong> ${emp.observacion}</p>` : ''}
+                <p><strong>Fecha de Ingreso:</strong> ${emp.fechaIngreso ||'—'}</p>
+                <p><strong>Estado:</strong> ${emp.activo ?'✅ Activo' : '❌ Inactivo'}</p>${emp.observacion ?`
+                <p><strong>Observaciones:</strong> ${emp.observacion}</p>` : ''}
                 <button class="btn-editar-colab" data-id="${emp.id}" style="margin-top:12px; background:#007bff; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer;">
                     ✏️ Editar
                 </button>
             </div>
         `;
     });
-
     resultadoDiv.innerHTML = html;
     resultadoDiv.querySelectorAll('.btn-editar-colab').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -942,10 +901,8 @@ function guardarNuevoEmpleado(event) {
     const rut = document.getElementById('emp-rut')?.value.trim();
     if (!rut || !validarRutChileno(rut)) return mostrarToast("El RUT es obligatorio y debe ser válido.", "error");
     if (appData.empleados.some(e => e.rut === rut)) return mostrarToast("El RUT ya está registrado.", "error");
-
     const cargoId = document.getElementById('emp-cargo')?.value;
     if (!cargoId) return mostrarToast("Debe seleccionar un cargo.", "error");
-
     const fechaNac = document.getElementById('emp-fecha-nac')?.value;
     if (!fechaNac) return mostrarToast("La fecha de nacimiento es obligatoria.", "error");
     const hoy = new Date();
@@ -963,34 +920,23 @@ function guardarNuevoEmpleado(event) {
 
     const nuevoEmpleado = {
         id: `emp-${Date.now()}`,
-        nombre1: document.getElementById('emp-nombre1')?.value ||
-'',
-        nombre2: document.getElementById('emp-nombre2')?.value ||
-'',
-        apepaterno: document.getElementById('emp-apepaterno')?.value ||
-'',
-        apematerno: document.getElementById('emp-apematerno')?.value ||
-'',
+        nombre1: document.getElementById('emp-nombre1')?.value ||'',
+        nombre2: document.getElementById('emp-nombre2')?.value ||'',
+        apepaterno: document.getElementById('emp-apepaterno')?.value ||'',
+        apematerno: document.getElementById('emp-apematerno')?.value ||'',
         rut,
-        telefono: document.getElementById('emp-telefono')?.value ||
-'',
-        direccion: document.getElementById('emp-direccion')?.value ||
-'',
-        region: document.getElementById('emp-region')?.value ||
-'',
-        comuna: document.getElementById('emp-comuna')?.value ||
-'',
+        telefono: document.getElementById('emp-telefono')?.value ||'',
+        direccion: document.getElementById('emp-direccion')?.value ||'',
+        region: document.getElementById('emp-region')?.value ||'',
+        comuna: document.getElementById('emp-comuna')?.value ||'',
         fechaNacimiento: fechaNac,
-        email: document.getElementById('emp-email')?.value ||
-'',
+        email: document.getElementById('emp-email')?.value ||'',
         cargoId,
-        fechaIngreso: document.getElementById('emp-fecha-ingreso')?.value ||
-'',
-        observacion: document.getElementById('emp-observacion')?.value ||
-'',
+        fechaIngreso: document.getElementById('emp-fecha-ingreso')?.value ||'',
+        observacion: document.getElementById('emp-observacion')?.value ||'',
         activo: true,
         fechaVencimientoLicencia: esTecnico ?
-document.getElementById('emp-fecha-vencimiento-licencia')?.value : null,
+        document.getElementById('emp-fecha-vencimiento-licencia')?.value : null,
         stock: { equipos: [], tarjetas: [] }
     };
     appData.empleados.push(nuevoEmpleado);
@@ -1044,7 +990,6 @@ function abrirEdicionEmpleado(empleadoId) {
         grupoLicenciaEdit.style.display = 'none';
         fechaLicenciaEdit.value = '';
     }
-
     mostrarPanel('panel-editar-empleado');
 }
 
@@ -1087,21 +1032,17 @@ function guardarEdicionEmpleado(event) {
 
     appData.empleados[index] = {
         ...appData.empleados[index],
-        nombre1: document.getElementById('editar-nombre1')?.value ||
-'',
+        nombre1: document.getElementById('editar-nombre1')?.value ||'',
         nombre2: document.getElementById('editar-nombre2')?.value || '',
-        apepaterno: document.getElementById('editar-apepaterno')?.value ||
-'',
+        apepaterno: document.getElementById('editar-apepaterno')?.value ||'',
         apematerno: document.getElementById('editar-apematerno')?.value || '',
         rut,
-        telefono: document.getElementById('editar-telefono')?.value ||
-'',
+        telefono: document.getElementById('editar-telefono')?.value ||'',
         direccion: document.getElementById('editar-direccion')?.value || '',
-        region: document.getElementById('editar-region')?.options[document.getElementById('editar-region')?.selectedIndex]?.text ||
-'',
+        region: document.getElementById('editar-region')?.options[document.getElementById('editar-region')?.selectedIndex]?.text ||'',
         comuna: document.getElementById('editar-comuna')?.value || '',
         fechaNacimiento: fechaNac ||
-appData.empleados[index].fechaNacimiento,
+        appData.empleados[index].fechaNacimiento,
         email: document.getElementById('editar-email')?.value || '',
         cargoId,
         fechaIngreso: document.getElementById('editar-fecha-ingreso')?.value || '',
@@ -1143,22 +1084,16 @@ z-index: 2000;`;
             <h3 style="margin-top: 0; text-align: center;">Motivo de Rechazo</h3>
             <div id="motivos-container" style="display: flex; flex-direction: column; gap: 8px; margin: 15px 0;">
                 ${TIPOS_RECHAZO.map(motivo => `<button type="button" data-motivo="${motivo}" style="background: #f8f9fa; border: 1px solid #ddd; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 14px; transition: 
- 
- all 0.2s;">${motivo}</button>`).join('')}
+                all 0.2s;">${motivo}</button>`).join('')}
             </div>
             <div>
                 <label for="observacion-rechazo" style="display: block; margin-bottom: 6px; font-weight: 600;">Observación (mínimo 5 caracteres):</label>
                 <textarea id="observacion-rechazo" placeholder="Ej: Cliente no estaba en casa..." style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; min-height: 60px;"></textarea>
-           <div id="error-observacion" 
-style="color: #dc3545; font-size: 0.85em; margin-top: 5px;
- display: none;">La observación es obligatoria.</div>
+                <div id="error-observacion"style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">La observación es obligatoria.</div>
             </div>
-            <div style="text-align: right;
-margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
-                <button type="button" id="btnCancelarRechazo" style="background: #6c757d;
-color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Cancelar</button>
-                <button type="button" id="btnAceptarRechazo" disabled style="background: #ccc;
-color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: not-allowed;">Aceptar</button>
+            <div style="text-align: right; margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" id="btnCancelarRechazo" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Cancelar</button>
+                <button type="button" id="btnAceptarRechazo" disabled style="background: #ccc; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: not-allowed;">Aceptar</button>
             </div>
         </div>
     `;
@@ -1172,19 +1107,15 @@ color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: not-a
     if (motivosContainer) {
         motivosContainer.addEventListener('click', (e) => {
         
- 
-     if (e.target.tagName === 'BUTTON') {
+    if (e.target.tagName === 'BUTTON') {
                 seleccionarMotivoRechazo(ordenId, e.target.dataset.motivo);
                 document.querySelectorAll('#motivos-container button').forEach(btn => {
                     btn.style.background = btn === e.target ? '#007bff' : '#f8f9fa';
-                    btn.style.color = btn === e.target ? 'white' 
- : 
- 'black';
+                    btn.style.color = btn === e.target ? 'white' : 'black';
                 });
- }
+}
         });
     }
-
     const obsTextarea = document.getElementById('observacion-rechazo');
     if (obsTextarea) obsTextarea.addEventListener('input', validarObservacionRechazo);
 }
@@ -1695,31 +1626,26 @@ function procesarExcelTarjetas(file, articuloCodigo) {
                 if (json.length < 2) return reject("Archivo vacío o sin datos.");
                 const headers = json[0].map(h => h?.toString().trim().toLowerCase());
                 let tarjetas = [];
-                if (headers.includes('serie') || headers.includes('codigo')) { // Acepta 'serie' o 'codigo' como header
+                if (headers.includes('serie') || headers.includes('codigo')) {
                     const idxSerie = headers.findIndex(h => h === 'serie' || h === 'codigo');
                     
                     tarjetas = json.slice(1).map(row => ({
-                        codigo: articuloCodigo, // <-- USA EL CÓDIGO DEL ARGUMENTO
+                        codigo: articuloCodigo,
                         nombreArticulo: articulo.nombre,
                         serie: row[idxSerie]?.toString().trim() || ''
                     })).filter(t => t.serie);
                 } else {
-                    // Si no, asume 1 columna por posición: Col0=serie
-                    // (Como dice la etiqueta HTML)
                     tarjetas = json.slice(1).map(row => ({
-                        codigo: articuloCodigo, // <-- USA EL CÓDIGO DEL ARGUMENTO
+                        codigo: articuloCodigo, 
                         nombreArticulo: articulo.nombre,
-                        serie: row[0]?.toString().trim() || ''  // <-- Columna 0
+                        serie: row[0]?.toString().trim() || ''
                     })).filter(t => t.serie);
                 }
-                // --- FIN LÓGICA CORREGIDA ---
 
                 if (tarjetas.length === 0) return reject("No se encontraron series válidas.");
 
-                // [MODIFICADO source: 383]
                 resolve(tarjetas);
             } catch (err) {
-                // [MODIFICADO source: 384]
                 reject(err.message || "Error al leer el archivo Excel.");
             }
         };
@@ -1756,12 +1682,11 @@ async function guardarIngresoSeriados(event) {
             timestamp: Date.now()
         };
 
-        // Inicializar si no existe
         if (!Array.isArray(appData.ingresosSeriados)) appData.ingresosSeriados = [];
 
         const guiaExistenteIndex = appData.ingresosSeriados.findIndex(ing => ing.guia === guia);
         if (guiaExistenteIndex > -1) {
-            // Preguntar si sobrescribir
+
             mostrarConfirmacion(
                 `La guía N° ${guia} ya fue ingresada. ¿Desea sobrescribirla?`,
                 () => {
@@ -1774,7 +1699,6 @@ async function guardarIngresoSeriados(event) {
                 () => mostrarToast("Ingreso cancelado.", "info")
             );
         } else {
-            // ✅ ¡ESTE ES EL CASO QUE FALTABA!
             appData.ingresosSeriados.push(ingreso);
             localStorage.setItem('ingresosSeriados', JSON.stringify(appData.ingresosSeriados));
             mostrarModalConfirmacion(equipos.length, 'equipo', articuloCodigo, () => {
@@ -1927,33 +1851,22 @@ function buscarSerie() {
     const input = document.getElementById('input-buscar-serie');
     const resultadoDiv = document.getElementById('resultado-busqueda-serie');
     if (!input || !resultadoDiv) return;
-
     const termino = input.value.trim().toLowerCase();
     if (!termino) return mostrarToast("Ingrese un número de serie o código.", "error");
-
     let resultados = [];
-    // 🔍 Buscar en EQUIPOS (seriados)
     appData.ingresosSeriados?.forEach(ingreso => {
         ingreso.equipos?.forEach(eq => {
             if (eq.serie1.toLowerCase().includes(termino) || eq.serie2.toLowerCase().includes(termino)) {
                 const articulo = appData.articulos.seriados.find(a => a.codigo === eq.codigo);
                 let estado = 'En bodega';
                 let detalle = '';
-
- 
- 
-                // Verificar si está asignado a un técnico
                 let asignadoATecnico = null;
                 appData.empleados.forEach(emp => {
                     if (emp.activo && emp.stock?.equipos) {
-                
-  
-        const equipoAsignado = emp.stock.equipos.find(e => 
-                            e.serie1 === eq.serie1 && e.serie2 === eq.serie2 && e.articuloCodigo === eq.codigo
-                        );
-                        
-                        if (equipoAsignado) 
- {
+                        const equipoAsignado = emp.stock.equipos.find(e => 
+                        e.serie1 === eq.serie1 && e.serie2 === eq.serie2 && e.articuloCodigo === eq.codigo
+                        );                       
+                        if (equipoAsignado) {
                             asignadoATecnico = `${emp.nombre1} ${emp.apepaterno}`;
                         }
                     }
@@ -1962,94 +1875,70 @@ function buscarSerie() {
                     estado = 'Asignado a técnico';
                     detalle = asignadoATecnico;
                 } else {
-                    // Verificar si fue usado en una orden liquidadas
                     const ordenUsada = ordenes.find(o => 
                         o.estado === 'Liquidadas' && 
-              
- 
-           (o.subServicio?.includes(eq.codigo) || o.servicio?.includes(eq.codigo))
+                        (o.subServicio?.includes(eq.codigo) || o.servicio?.includes(eq.codigo))
                     );
                     if (ordenUsada) {
                         estado = 'Instalado en cliente';
                         detalle = `Orden #${ordenUsada.numero}`;
                     }
                 }
-
                 resultados.push({
                     tipo: 'Equipo',
                     guia: ingreso.guia,
                     fecha: ingreso.fecha,
- 
- 
                     codigoArticulo: eq.codigo,
                     nombreArticulo: articulo ? articulo.nombre : eq.codigo,
                     serie1: eq.serie1,
                     serie2: eq.serie2,
-            
-  
-        estado,
+                    estado,
                     detalle
                 });
             }
         });
     });
-    // 🔍 Buscar en TARJETAS
     appData.ingresosTarjetas?.forEach(ingreso => {
         ingreso.tarjetas?.forEach(t => {
             if (t.serie.toLowerCase().includes(termino)) {
                 const articulo = appData.articulos.ferreteria.find(a => a.codigo === t.codigo);
                 let estado = 'En bodega';
                 let detalle = '';
-
-    
- 
-             let asignadoATecnico = null;
+                let asignadoATecnico = null;
                 appData.empleados.forEach(emp => {
                     if (emp.activo && emp.stock?.tarjetas) {
                         const tarjetaAsignada = emp.stock.tarjetas.find(tt => 
-             
-  
-               tt.articuloCodigo === t.codigo && tt.cantidad > 0
+                        tt.articuloCodigo === t.codigo && tt.cantidad > 0
                         );
                         if (tarjetaAsignada) {
                             
                             asignadoATecnico = 
- `${emp.nombre1} ${emp.apepaterno}`;
+                            `${emp.nombre1} ${emp.apepaterno}`;
                         }
                     }
                 });
-
                 if (asignadoATecnico) {
-                  
-                    estado 
- = 'Asignado a técnico';
+                    estado = 'Asignado a técnico';
                     detalle = asignadoATecnico;
                 } else {
                     const ordenUsada = ordenes.find(o => 
                         o.estado === 'Liquidadas' && 
                         (o.subServicio?.includes(t.codigo) || o.servicio?.includes(t.codigo))
-                   
- 
-  );
+                    );
                     if (ordenUsada) {
                         estado = 'Instalado en cliente';
                         detalle = `Orden #${ordenUsada.numero}`;
                     }
                 }
-
                 resultados.push({
                     tipo: 'Tarjeta',
                     guia: ingreso.guia,
                     fecha: ingreso.fecha,
- 
- 
                     codigoArticulo: t.codigo,
                     nombreArticulo: articulo ? articulo.nombre : t.codigo,
                     serie: t.serie,
                     estado,
-             
-  
-       detalle
+                    detalle
                 });
             }
         });
@@ -2058,45 +1947,34 @@ function buscarSerie() {
         resultadoDiv.innerHTML = `<p style="color:#dc3545;">No se encontró ninguna serie o código con ese término.</p>`;
         return;
     }
-
     let html = `<h3>Resultados (${resultados.length})</h3>`;
     resultados.forEach(r => {
         const colorEstado = 
             r.estado === 'En bodega' ? '#17a2b8' :
             r.estado === 'Asignado a técnico' ? '#ffc107' :
             r.estado === 'Instalado en cliente' ? '#28a745' : '#6c757d';
-
         if (r.tipo === 'Equipo') {
-            html += `
-    
- 
-             <div style="background:#f8f9fa; padding:14px; border-radius:8px; margin:12px 0; border-left:4px solid ${colorEstado}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            html += `<div style="background:#f8f9fa; padding:14px; border-radius:8px; margin:12px 0; border-left:4px solid ${colorEstado}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     <p><strong>Tipo:</strong> ${r.tipo}</p>
                     <p><strong>Nombre del artículo:</strong> ${r.nombreArticulo}</p>
                     <p><strong>Código:</strong> ${r.codigoArticulo}</p>
-         
-  
-           <p><strong>N° de Guía:</strong> ${r.guia}</p>
+                    <p><strong>N° de Guía:</strong> ${r.guia}</p>
                     <p><strong>Fecha de ingreso:</strong> ${r.fecha}</p>
                     <p><strong>Serie 1:</strong> ${r.serie1}</p>
                     <p><strong>Serie 2:</strong> ${r.serie2}</p>
-                  
-   
- <p><strong>Estado actual:</strong> <span style="color:${colorEstado}; font-weight:bold;">${r.estado}</span></p>
+                    <p><strong>Estado actual:</strong> <span style="color:${colorEstado}; font-weight:bold;">${r.estado}</span></p>
                     ${r.detalle ? `<p><strong>Detalles:</strong> ${r.detalle}</p>` : ''}
                 </div>
             `;
         } else {
             html += `
-                
                 <div style="background:#f8f9fa;
- padding:14px; border-radius:8px; margin:12px 0; border-left:4px solid ${colorEstado}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    padding:14px; border-radius:8px; margin:12px 0; border-left:4px solid ${colorEstado}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     <p><strong>Tipo:</strong> ${r.tipo}</p>
                     <p><strong>Nombre del artículo:</strong> ${r.nombreArticulo}</p>
                     <p><strong>Código:</strong> ${r.codigoArticulo}</p>
                     <p><strong>N° de 
                     Guía:</strong> ${r.guia}</p>
- 
                     <p><strong>Fecha de ingreso:</strong> ${r.fecha}</p>
                     <p><strong>Código/Serie:</strong> ${r.serie}</p>
                     <p><strong>Estado actual:</strong> <span style="color:${colorEstado};
@@ -2118,15 +1996,12 @@ function cargarMaterialesAsignacion(tipo) {
         console.error("Debug: No se encontró el select 'material-asignacion'");
         return;
     }
-
     const ingresosSeriados = appData.ingresosSeriados || [];
     const ingresosTarjetas = appData.ingresosTarjetas || [];
     const empleados = appData.empleados || [];
     const articulosSeriados = appData.articulos.seriados || [];
     const articulosFerreteria = appData.articulos.ferreteria || [];
-
     console.log(`- Debug: Iniciando cargarMaterialesAsignacion(${tipo}) -`);
-
     if (tipo === 'equipo') {
         console.log("Debug: Filtrando equipos. Artículos en 'seriados':", articulosSeriados.length);
         const materialesConStock = articulosSeriados.filter(articulo => {
@@ -2134,18 +2009,15 @@ function cargarMaterialesAsignacion(tipo) {
             const enBodega = ingresosSeriados
                 .filter(ing => ing.articuloCodigo === articulo.codigo)
                 .reduce((total, ing) => total + (ing.equipos?.length || 0), 0);
-
             const asignados = empleados.reduce((total, emp) => {
                 const stock = emp.stock?.equipos || [];
                 return total + stock.filter(eq => eq.articuloCodigo === articulo.codigo).length;
             }, 0);
-
             const disponible = enBodega - asignados;
             console.log(`Debug: -> enBodega: ${enBodega} | asignados: ${asignados} | Disponible: ${disponible}`);
             return disponible > 0;
         });
         populateSelect(select, materialesConStock.map(a => ({ value: a.codigo, text: a.nombre })), "Seleccione Equipo");
-
         } else if (tipo === 'tarjeta') {
         console.log("Debug: Filtrando tarjetas. Artículos en 'ferreteria':", articulosFerreteria.length);
         const materialesConStock = articulosFerreteria.filter(articulo => {
@@ -2153,7 +2025,6 @@ function cargarMaterialesAsignacion(tipo) {
             const enBodega = ingresosTarjetas
                 .filter(ing => ing.articuloCodigo === articulo.codigo)
                 .reduce((total, ing) => total + (ing.tarjetas?.length || 0), 0);
-            // 🔥 CORRECCIÓN: usar 'tarjetas', no 'equipos'
             const asignadas = empleados.reduce((total, emp) => {
                 const stock = emp.stock?.tarjetas || [];
                 return total + stock.filter(t => t.articuloCodigo === articulo.codigo).reduce((sum, t) => sum + t.cantidad, 0);
@@ -2166,7 +2037,6 @@ function cargarMaterialesAsignacion(tipo) {
     }
 }
 
-
 document.addEventListener("click", (e) => {
     if (e.target && e.target.id === "btnAsignarMaterial") {
         const materialesSeleccionados = document.querySelectorAll(".chk-material:checked");
@@ -2174,7 +2044,6 @@ document.addEventListener("click", (e) => {
             mostrarToast("Seleccione al menos un material para asignar.", "error");
             return;
         }
-
         materialesSeleccionados.forEach(chk => {
             const id = chk.dataset.id;
             const material = appData.articulos.seriados.find(a => a.id == id);
@@ -2183,7 +2052,6 @@ document.addEventListener("click", (e) => {
                 material.fechaAsignacion = new Date().toISOString().split("T")[0];
             }
         });
-
         guardarDatosLogistica?.();
         mostrarToast("✅ Materiales asignados con éxito.");
         if (typeof renderTablaSeriados === "function") renderTablaSeriados();
@@ -2194,64 +2062,47 @@ document.addEventListener("click", (e) => {
 // --- LÓGICA DEL NUEVO PANEL: SALDO TÉCNICO ---
 // =======================================================
 
-// Función para inicializar el select de técnicos y el evento de cambio
 function setupSaldoTecnico() {
     const select = document.getElementById('filtro-tecnico-saldo');
     if (!select) return;
-
-    // Obtener la lista de técnicos activos
     const tecnicosActivos = appData.empleados
         .filter(emp => emp.activo && appData.cargos.find(c => c.id === emp.cargoId)?.nombre.toLowerCase().includes('tecnico'))
         .map(emp => ({ value: emp.id, text: `${emp.nombre1} ${emp.apepaterno}` }));
-    // Cargar el select con la opción "Todos"
-    // Usamos 'todos' como valor para el filtro global.
     populateSelect(select, tecnicosActivos, "Todos los Técnicos");
-    
-    // Cambiar el valor de la opción por defecto a 'todos' para el filtro
     const defaultOption = select.querySelector('option[value=""]');
     if (defaultOption) defaultOption.value = 'todos'; 
-
-    // Agregar el listener para renderizar al cambiar la selección
     select.onchange = renderSaldoTecnico;
-    // Renderizar con la opción por defecto (Todos) al cargar
     renderSaldoTecnico();
 }
 
-// Función para renderizar el stock asignado
 function renderSaldoTecnico() {
     const tecnicoId = document.getElementById('filtro-tecnico-saldo')?.value;
     const detalleDiv = document.getElementById('detalle-stock');
     const totalSpan = document.getElementById('total-asignado');
     if (!detalleDiv || !totalSpan) return;
-
     detalleDiv.innerHTML = '';
     let empleadosAfectados = [];
     let totalStockGlobal = 0;
     if (tecnicoId === 'todos') {
-        // Incluir a todos los técnicos activos
         empleadosAfectados = appData.empleados.filter(emp => 
             emp.activo && 
             appData.cargos.find(c => c.id === emp.cargoId)?.nombre.toLowerCase().includes('tecnico')
         );
     } else if (tecnicoId) {
-        // Incluir solo al técnico seleccionado por ID
         const tecnico = appData.empleados.find(emp => emp.id === tecnicoId);
         if (tecnico) {
             empleadosAfectados.push(tecnico);
         }
     } else {
-        // Caso inicial sin selección (Aunque el setup llama con 'todos')
         totalSpan.textContent = '0';
         detalleDiv.innerHTML = '<p style="text-align: center; color: #6c757d; margin-top: 40px;">Seleccione un técnico o "Todos" para ver el detalle del stock.</p>';
         return;
     }
-
     if (empleadosAfectados.length === 0) {
         totalSpan.textContent = '0';
         detalleDiv.innerHTML = '<p style="text-align: center; color: #6c757d; margin-top: 40px;">No se encontraron técnicos activos o no tienen stock asignado.</p>';
         return;
     }
-
     let htmlDetalle = '';
     empleadosAfectados.forEach(emp => {
         const nombreCompleto = `${emp.nombre1} ${emp.apepaterno}`;
@@ -2261,13 +2112,10 @@ function renderSaldoTecnico() {
         totalStockGlobal += totalTecnico;
         
         if (totalTecnico > 0) {
-   
             htmlDetalle += `
                 <div class="saldo-tecnico-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px; background: #fff;">
                     <h4 style="margin-top: 0; color: #007bff;">${nombreCompleto} (${totalTecnico} ítems)</h4>
-                    
-              
-            <h5 style="border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 15px; color:#333;">Equipos Asignados (${stockEquipos.length})</h5>
+                    <h5 style="border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 15px; color:#333;">Equipos Asignados (${stockEquipos.length})</h5>
                     <div style="overflow-x: auto;">
                     <table style="width: 100%; min-width: 600px;
                     border-collapse: collapse; font-size: 0.9em;">
@@ -2286,24 +2134,18 @@ function renderSaldoTecnico() {
                             </tr>
                         </thead>
                         <tbody>
-                      
-            ${stockEquipos.length > 0 ? stockEquipos.map(eq => `
+                            ${stockEquipos.length > 0 ? stockEquipos.map(eq => `
                                 <tr>
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${appData.articulos.seriados.find(a => a.codigo === eq.articuloCodigo)?.nombre || 'Desconocido'}</td>
-        
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${eq.articuloCodigo}</td>
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${eq.serie1}</td>
-                        
-                    <td style="padding: 8px; border-bottom: 1px solid #eee;">${eq.serie2}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #eee;">${eq.serie2}</td>
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${eq.fechaAsignacion}</td>
                                 </tr>
-        
-                        `).join('') : `<tr><td colspan="5" style="text-align: center;
-                        color: #6c757d; padding: 8px;">No tiene equipos seriados asignados.</td></tr>`}
+                        `).join('') : `<tr><td colspan="5" style="text-align: center; color: #6c757d; padding: 8px;">No tiene equipos seriados asignados.</td></tr>`}
                         </tbody>
                     </table>
                     </div>
-
                     <h5 style="border-bottom: 1px solid #eee;
                     padding-bottom: 5px; margin-top: 25px; color:#333;">Tarjetas/Otros (${stockTarjetas.reduce((sum, t) => sum + t.cantidad, 0)})</h5>
                     <div style="overflow-x: auto;">
@@ -2321,16 +2163,13 @@ function renderSaldoTecnico() {
                                 text-align: left;">Fecha Asign.</th>
                             </tr>
                         </thead>
-                        <tbody>
-                      
-            ${stockTarjetas.length > 0 ? stockTarjetas.map(t => `
+                        <tbody>                     
+                            ${stockTarjetas.length > 0 ? stockTarjetas.map(t => `
                                 <tr>
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${appData.articulos.ferreteria.find(a => a.codigo === t.articuloCodigo)?.nombre || 'Desconocido'}</td>
-        
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${t.articuloCodigo}</td>
                                     <td style="padding: 8px; border-bottom: 1px solid #eee;">${t.cantidad}</td>
-                        
-                    <td style="padding: 8px; border-bottom: 1px solid #eee;">${t.fechaAsignacion}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #eee;">${t.fechaAsignacion}</td>
                                 </tr>
                             `).join('') : `<tr><td colspan="4" style="text-align: center;
                             color: #6c757d; padding: 8px;">No tiene tarjetas/otros asignados.</td></tr>`}
@@ -2339,26 +2178,15 @@ function renderSaldoTecnico() {
                     </div>
                 </div>
             `;
-  
-          }
+        }
     });
-
-    totalSpan.textContent = totalStockGlobal;
-    
+    totalSpan.textContent = totalStockGlobal;    
     if (htmlDetalle === '' && empleadosAfectados.length > 0) {
         detalleDiv.innerHTML = '<p style="text-align: center; margin-top: 50px;">El técnico o los técnicos seleccionados no tienen stock asignado.</p>';
     } else {
         detalleDiv.innerHTML = htmlDetalle;
     }
 }
-
-
-// ============================================
-// --- GUARDAR ASIGNACIÓN (Scope global) ---
-// ============================================
-
-
-
 // ============================================
 // --- GUIA DE ASIGNACION ---
 // ============================================
@@ -2380,11 +2208,9 @@ async function enviarCorreoAsignacion(tecnico, tipo, codigo, detalle, guia) {
         appData.articulos.seriados.find(a => a.codigo === codigo) :
         appData.articulos.ferreteria.find(a => a.codigo === codigo);
     const nombreArticulo = articulo?.nombre || codigo;
-
     let cuerpo = `Hola ${tecnico.nombre1},\n\n`;
     cuerpo += `Se han asignado los siguientes equipos: **${guia}**\n\n`;
     cuerpo += `Muy buen día: ${nombreArticulo} (${codigo})\n\n`;
-
     if (tipo === 'equipo') {
         cuerpo += `Series asignadas (${detalle.length}):\n`;
         detalle.forEach(eq => {
@@ -2393,18 +2219,13 @@ async function enviarCorreoAsignacion(tecnico, tipo, codigo, detalle, guia) {
     } else {
         cuerpo += `Cantidad asignada: ${detalle.length}\n`;
     }
-
     cuerpo += `\nSaludos,\nSistema de Gestión Logística`;
-
     const asunto = `Asignación de Material - Guía ${guia}`;
-
     const templateParams = {
         to_name: tecnico.nombre1,
         subject: asunto,
         message: cuerpo
     };
-
-    // ✅ Correo al técnico (si tiene email)
     if (tecnico.email) {
         templateParams.to_email = tecnico.email;
         try {
@@ -2415,12 +2236,9 @@ async function enviarCorreoAsignacion(tecnico, tipo, codigo, detalle, guia) {
             mostrarToast(`Error al enviar correo a ${tecnico.nombre1}.`, "error");
         }
     }
-
-    // ✅ Copia a bodega (siempre, a bodegapoolosorno@gmail.com)
     templateParams.to_email = "bodegapoolosorno@gmail.com";
     templateParams.subject = "[COPIA BODEGA] " + asunto;
     templateParams.message = cuerpo + "\n\n--- COPIA DE RESPALDO PARA BODEGA ---";
-
     try {
         await emailjs.send('service_8p2y4a6', 'template_m8313jl', templateParams);
         console.log("✅ Copia enviada a bodega: bodegapoolosorno@gmail.com");
@@ -2436,9 +2254,6 @@ async function enviarCorreoAsignacion(tecnico, tipo, codigo, detalle, guia) {
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatos();
     cargarDatosLogistica();
-    // =======================================================
-    // --- BLOQUE DE CARGA DE STOCK (SEGURO) ---
-    // =======================================================
     try {
         const ingresosSeriadosData = localStorage.getItem('ingresosSeriados');
         if (ingresosSeriadosData && ingresosSeriadosData !== 'null') {
@@ -2448,53 +2263,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (e) {
         console.error("Error al cargar ingresosSeriados:", e);
-        appData.ingresosSeriados = []; // En caso de error, es un array
+        appData.ingresosSeriados = [];
     }
-
     try {
         const ingresosTarjetasData = localStorage.getItem('ingresosTarjetas');
         if (ingresosTarjetasData && ingresosTarjetasData !== 'null') {
             appData.ingresosTarjetas = JSON.parse(ingresosTarjetasData) || [];
         } else {
-            appData.ingresosTarjetas = []; // Asegura que sea un array
+            appData.ingresosTarjetas = [];
         }
     } catch (e) {
         console.error("Error al cargar ingresosTarjetas:", e);
-        appData.ingresosTarjetas = []; // En caso de error, es un array
+        appData.ingresosTarjetas = [];
     }
-    // Paso 1
     document.getElementById('btnSiguientePaso1')?.addEventListener('click', validarNumeroOrden);
-
-    // Paso 2 → Validar combinación
-document.getElementById('btnValidarCombinacion')?.addEventListener('click', validarCombinacion);
-
-    // Volver de Paso 2 a Paso 1
+    document.getElementById('btnValidarCombinacion')?.addEventListener('click', validarCombinacion);
     document.getElementById('btnVolverPaso1')?.addEventListener('click', () => {
-        document.getElementById('paso-2').style.display = 'none';
-        document.getElementById('paso-1').style.display = 'block';
+    document.getElementById('paso-2').style.display = 'none';
+    document.getElementById('paso-1').style.display = 'block';
     });
     // =======================================================
     // --- FIN DEL BLOQUE ---
     // =======================================================
     actualizarPersonalDTH();
-
     const safeAddListener = (id, event, handler) => {
         const el = document.getElementById(id);
         if (el) el.addEventListener(event, handler);
     };
-
-    // === NAVEGACIÓN PRINCIPAL Y SUBMENÚS ===
     document.querySelectorAll('#main-nav button[data-module]').forEach(button => {
         button.addEventListener('click', () => seleccionarModulo(button.dataset.module));
     });
-
-    // === LISTENER ÚNICO PARA EL SIDEBAR (Corregido) ===
     document.querySelectorAll('#sidebar button[data-panel]').forEach(button => {
         button.addEventListener('click', () => {
             const panelId = button.dataset.panel;
             mostrarPanel(panelId);
-    
-            // Lógica específica por panel
             if (panelId === 'panel-ingreso-seriados' ||
             panelId === 'panel-ingreso-no-seriados') {
                 cargarArticulosEnSelects();
@@ -2507,7 +2309,6 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
                 document.getElementById('contenedor-cantidad').style.display = 'none';
                 document.getElementById('contenedor-ingreso-series').style.display = 'none';
                 document.getElementById('contenedor-asignar-final').style.display = 'none';
-
             setTimeout(() => {
                 try {
                     inicializarAsignacion();
@@ -2519,8 +2320,7 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
             }
         });
     });
-
-    // === LISTENERS DE BOTONES Y FORMULARIOS (Safe) ===
+    // === LISTENERS DE BOTONES Y FORMULARIOS ===
     safeAddListener('btnLogin', 'click', login);
     safeAddListener('btnBuscarPorOrden', 'click', buscarPorOrden);
     safeAddListener('btnBuscarPorRut', 'click', buscarPorRut);
@@ -2546,20 +2346,13 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
     safeAddListener('btn-buscar-serie', 'click', buscarSerie);
     safeAddListener('btn-generar-guia', 'click', () => mostrarToast("Generando guía de salida...", "info"));
 
-    // [AÑADIR ESTO DENTRO DEL DOMContentLoaded]
-
-    // Listener para el nuevo formulario de edición de orden
     const formEditarOrden = document.getElementById('form-editar-orden');
     if (formEditarOrden) formEditarOrden.addEventListener('submit', guardarEdicionOrden);
-
-    // Listener para el botón cancelar de ese formulario
     safeAddListener('btnCancelarEdicionOrden', 'click', () => mostrarPanel('panel-agendadas'));
 
-    // ... (justo antes o después de los listeners de los otros formularios)
     const formEditarEmpleado = document.getElementById('form-editar-empleado');
-    if (formEditarEmpleado) formEditarEmpleado.addEventListener('submit', guardarEdicionEmpleado); // [cite: 760]
+    if (formEditarEmpleado) formEditarEmpleado.addEventListener('submit', guardarEdicionEmpleado);
 
-    // === LISTENERS DE SUBMIT DE FORMULARIOS ===
     const formCrear = document.getElementById('form-crear-articulo');
     if (formCrear) formCrear.addEventListener('submit', guardarArticulo);
 
@@ -2574,7 +2367,6 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
     const formIngresoOrden = document.getElementById('form-ingreso-orden');
     if (formIngresoOrden) formIngresoOrden.addEventListener('submit', guardarOrden);
 
-    // === LISTENERS PARA BÚSQUEDA CON 'ENTER' ===
     const inputSerie = document.getElementById('input-buscar-serie');
     if (inputSerie) {
         inputSerie.addEventListener('keypress', (e) => {
@@ -2589,7 +2381,6 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
         });
     }
 
-    // === LISTENER PARA REPORTES RRHH ===
     const reportesRRHH = document.querySelector('#reportes-rrhh .report-buttons');
     if (reportesRRHH) {
         reportesRRHH.addEventListener('click', (e) => {
@@ -2597,7 +2388,6 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
         });
     }
 
-    // === LISTENERS DE VALIDACIÓN/FORMATO DE RUT ===
     ['orden-rut', 'emp-rut', 'editar-rut'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -2605,14 +2395,13 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
             el.addEventListener('blur', (e) => validarRutInput(e.target));
         }
     });
-    // === LISTENER PARA LOGIN CON 'ENTER' ===
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && document.getElementById('login-container').style.display !== 'none') {
             event.preventDefault();
             login();
         }
     });
-    // === LÓGICA DE FORMATEO DE RUT (Helper) ===
+
     function formatearRut(inputElement) {
         let valor = inputElement.value.replace(/[^0-9kK]/g, '').toLowerCase();
         if (!valor) return;
@@ -2627,22 +2416,12 @@ document.getElementById('btnValidarCombinacion')?.addEventListener('click', vali
     // --- LÓGICA CORREGIDA: ASIGNACIÓN DE MATERIALES ---
     // =======================================================
 
-    // 1. Obtenemos las variables de asignación UNA VEZ
-    
-
-    // 4. Listener del formulario de Asignación
     const formAsignacion = document.getElementById('form-asignacion');
     if (formAsignacion) {
-        // La función 'guardarAsignacion' ahora está en el scope global
+        
         formAsignacion.addEventListener('submit', guardarAsignacion);
     }
-
-}); // Fin de DOMContentLoaded
-
-// ================================
-// NUEVA LÓGICA DE ASIGNACIÓN
-// ================================
-
+    });
 let asignacionActiva = {
     tipo: null,
     materialCodigo: null,
@@ -2652,7 +2431,6 @@ let asignacionActiva = {
     tecnicoId: null
 };
 
-// Genera guía correlativa: ASIG-YYYYMMDD-0001
 function generarGuiaAsignacion() {
     const hoy = new Date();
     const fechaStr = hoy.toISOString().slice(0, 10).replace(/-/g, '');
@@ -2663,9 +2441,7 @@ function generarGuiaAsignacion() {
     return `ASIG-${fechaStr}-${String(contador).padStart(4, '0')}`;
 }
 
-// Validación y asignación final
 async function procesarAsignacionFinal() {
-    // --- VALIDACIÓN TÉCNICO (CORREGIDA) ---
     if (!asignacionActiva.tecnicoId) {
         return mostrarToast("Debe seleccionar un técnico válido.", "error");
     }
@@ -2674,21 +2450,18 @@ async function procesarAsignacionFinal() {
         console.error("Técnico no encontrado con ID:", asignacionActiva.tecnicoId);
         return mostrarToast("Técnico no válido.", "error");
     }
-    // Material
+    
     if (!asignacionActiva.materialCodigo) {
         return mostrarToast("Seleccione un material.", "error");
     }
-    // Series
+    
     if (asignacionActiva.seriesIngresadas.length === 0) {
         return mostrarToast("No se han ingresado series.", "error");
     }
-
     const materialCodigo = asignacionActiva.materialCodigo;
     const tipo = asignacionActiva.tipo;
     const seriesIngresadas = asignacionActiva.seriesIngresadas;
     const seriesValidas = [];
-
-    // Validación de series (igual que antes)
     for (const serie of seriesIngresadas) {
         let encontrado = false;
         if (tipo === 'equipo') {
@@ -2711,8 +2484,7 @@ async function procesarAsignacionFinal() {
                 }
                 if (encontrado) break;
             }
-        } 
-        // TARJETAS
+        }
         else if (tipo === 'tarjeta') {
             for (const ingreso of (appData.ingresosTarjetas || [])) {
                 if (ingreso.articuloCodigo !== materialCodigo) continue;
@@ -2738,8 +2510,6 @@ async function procesarAsignacionFinal() {
             return mostrarToast(`La serie "${serie}" no existe o ya está asignada.`, "error");
         }
     }
-
-    // --- GUARDAR ASIGNACIÓN ---
     const guia = generarGuiaAsignacion();
     if (tipo === 'equipo') {
     seriesValidas.forEach(eq => {
@@ -2755,7 +2525,7 @@ async function procesarAsignacionFinal() {
         seriesValidas.forEach(eq => {
             tecnico.stock.tarjetas.push({
                 articuloCodigo: materialCodigo,
-                serie: eq.serie1, // ← porque en seriesValidas guardaste serie1 = la serie
+                serie: eq.serie1,
                 fechaAsignacion: new Date().toISOString().split('T')[0],
                 guiaAsignacion: guia
             });
@@ -2763,13 +2533,8 @@ async function procesarAsignacionFinal() {
     }
     guardarDatosRRHH();
     mostrarToast(`✅ Asignadas ${seriesValidas.length} series. Guía: ${guia}`, "success");
-    
-    // ✉️ Enviar correo (usando EmailJS, ya implementado)
     await enviarCorreoAsignacion(tecnico, tipo, materialCodigo, seriesValidas, guia);
-
-    // 🔁 PREGUNTAR QUÉ HACER DESPUÉS
     if (confirm("¿Desea asignar material a otro técnico?")) {
-        // ✅ SÍ: limpiar solo material/serie, mantener técnico
         asignacionActiva.tipo = null;
         asignacionActiva.materialCodigo = null;
         asignacionActiva.seriesIngresadas = [];
@@ -2780,10 +2545,8 @@ async function procesarAsignacionFinal() {
         document.getElementById('contenedor-asignar-final').style.display = 'none';
         document.getElementById('input-serie').value = '';
         document.getElementById('lista-series-ingresadas').innerHTML = '';
-        // El técnico SE SIGUE MANTENIENDO → listo para nuevo material
         mostrarToast("Listo para asignar nuevo material al mismo técnico.", "info");
     } else {
-        // ❌ NO: limpiar TODO y volver a bienvenida
         asignacionActiva = {
             tipo: null,
             materialCodigo: null,
@@ -2800,12 +2563,9 @@ async function procesarAsignacionFinal() {
         document.getElementById('contenedor-asignar-final').style.display = 'none';
         document.getElementById('input-serie').value = '';
         document.getElementById('lista-series-ingresadas').innerHTML = '';
-        // ✅ Volver a bienvenida
         mostrarPanel('modulo-bienvenida');
     }
 }
-
-
 function resetMaterialAsignacion() {
     asignacionActiva.tipo = null;
     asignacionActiva.materialCodigo = null;
@@ -2818,9 +2578,6 @@ function resetMaterialAsignacion() {
     document.getElementById('contenedor-ingreso-series').style.display = 'none';
     document.getElementById('contenedor-asignar-final').style.display = 'none';
 }
-
-
-// 🧹 Reinicia TODO (solo al finalizar con éxito o cancelar)
 function resetAsignacionCompleta() {
     asignacionActiva = {
         tipo: null,
@@ -2830,43 +2587,27 @@ function resetAsignacionCompleta() {
         tecnicoNombre: null,
         tecnicoId: null
     };
-
-    // Resetear UI
     document.getElementById('tecnico-asignacion').selectedIndex = 0;
     document.getElementById('tipo-asignacion').value = '';
     document.getElementById('material-asignacion').innerHTML = '<option value="">-- Seleccione --</option>';
     resetMaterialAsignacion();
 }
-
 // ================================
 // INICIALIZAR ASIGNACIÓN (al mostrar el panel)
 // ================================
-
 function inicializarAsignacion() {
-
-    // Reset lógico general
     resetAsignacionCompleta();
-
-    // Cargar técnicos
     cargarTecnicosAsignacion();
-
-    // === LISTENER TÉCNICO (CORREGIDO) ===
     document.getElementById('tecnico-asignacion').addEventListener('change', function() {
     const tecnicoId = this.value;
-
     asignacionActiva.tecnicoId = tecnicoId;
-
     const emp = appData.empleados.find(e => e.id === tecnicoId);
     asignacionActiva.tecnicoNombre = emp ? `${emp.nombre1} ${emp.apepaterno}` : null;
-
     console.log("✔ Técnico asignado:", asignacionActiva.tecnicoId, asignacionActiva.tecnicoNombre);
 });
-
-
-    // === LISTENER TIPO MATERIAL ===
     document.getElementById('tipo-asignacion').onchange = function () {
         const tipo = this.value;
-        resetMaterialAsignacion(); // ✅ Ahora solo resetea material, NO el técnico
+        resetMaterialAsignacion();
         asignacionActiva.tipo = tipo;
         const materialSelect = document.getElementById('material-asignacion');
         if (tipo) {
@@ -2875,49 +2616,33 @@ function inicializarAsignacion() {
             materialSelect.innerHTML = '<option value="">-- Seleccione tipo primero --</option>';
         }
     };
-
-    // === LISTENER MATERIAL ===
     document.getElementById('material-asignacion').onchange = function () {
         const codigo = this.value;
-
         asignacionActiva.materialCodigo = codigo;
-
-        // Ocultamos todo lo extra
         document.getElementById('contenedor-cantidad').style.display = 'none';
         document.getElementById('contenedor-ingreso-series').style.display = 'none';
         document.getElementById('contenedor-asignar-final').style.display = 'none';
         document.getElementById('cantidad-asignar').value = '';
-
         if (codigo) {
-            document.getElementById('contenedor-cantidad').style.display = 'block';
+        document.getElementById('contenedor-cantidad').style.display = 'block';
         }
     };
-
-    // Confirmar cantidad (aunque ya no se usa)
-    document.getElementById('btn-confirmar-cantidad').onclick = function () {
+        document.getElementById('btn-confirmar-cantidad').onclick = function () {
         document.getElementById('contenedor-ingreso-series').style.display = 'block';
         document.getElementById('input-serie').focus();
     };
-
-    // === AGREGAR SERIE ===
     document.getElementById('btn-agregar-serie').onclick = function () {
         const input = document.getElementById('input-serie');
         const serie = input.value.trim();
-
         if (!serie) return mostrarToast("Ingrese una serie.", "error");
         if (asignacionActiva.seriesIngresadas.includes(serie)) {
-            return mostrarToast("Serie ya ingresada.", "error");
+        return mostrarToast("Serie ya ingresada.", "error");
         }
-
         asignacionActiva.seriesIngresadas.push(serie);
         input.value = '';
-
         const lista = document.getElementById('lista-series-ingresadas');
-        lista.innerHTML = `
-            <p><strong>Series (${asignacionActiva.seriesIngresadas.length}/${asignacionActiva.cantidad}):</strong></p>
-            <ul>${asignacionActiva.seriesIngresadas.map(s => `<li>${s}</li>`).join('')}</ul>
-        `;
-
+        lista.innerHTML = `<p><strong>Series (${asignacionActiva.seriesIngresadas.length}/${asignacionActiva.cantidad}):</strong></p>
+            <ul>${asignacionActiva.seriesIngresadas.map(s => `<li>${s}</li>`).join('')}</ul>`;
         if (asignacionActiva.seriesIngresadas.length >= asignacionActiva.cantidad) {
             mostrarToast("✅ Series OK", "success");
             setTimeout(() => {
@@ -2925,8 +2650,6 @@ function inicializarAsignacion() {
             }, 800);
         }
     };
-
-    // === ASIGNAR MATERIAL FINAL ===
     document.getElementById('btn-asignar-material').onclick = function() {
     try {
         procesarAsignacionFinal();
@@ -2936,19 +2659,14 @@ function inicializarAsignacion() {
     }
 };
 }
-
-
 function mostrarConfirmacion(mensaje, callbackSi, callbackNo = () => {}) {
-    // Eliminar modal anterior si existe
     const modalExistente = document.getElementById('modal-confirmacion');
     if (modalExistente) modalExistente.remove();
-
     const modal = document.createElement('div');
     modal.id = 'modal-confirmacion';
     modal.style.cssText = `
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-        background: rgba(0,0,0,0.5); z-index: 2000; display: flex; justify-content: center; align-items: center;
-    `;
+        background: rgba(0,0,0,0.5); z-index: 2000; display: flex; justify-content: center; align-items: center;`;
     modal.innerHTML = `
         <div style="background: white; padding: 25px; border-radius: 10px; text-align: center; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
             <p style="font-size: 1.1em; margin: 0 0 20px;">${mensaje}</p>
@@ -2959,7 +2677,6 @@ function mostrarConfirmacion(mensaje, callbackSi, callbackNo = () => {}) {
         </div>
     `;
     document.body.appendChild(modal);
-
     document.getElementById('btn-confirmar-si').onclick = () => {
         modal.remove();
         callbackSi();
