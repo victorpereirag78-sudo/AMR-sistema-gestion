@@ -8,12 +8,6 @@ const appData = {
         "10.1": { nombre: "Provincia de Osorno", comunas: ["Osorno", "Puerto Octay", "Puyehue", "Río Negro", "Purranque", "San Juan de la Costa", "San Pablo"] },
         "10.2": { nombre: "Provincia de Chiloé", comunas: ["Castro", "Ancud", "Quellón", "Dalcahue", "Chonchi", "Curaco de Vélez", "Queilén", "Quinchao", "Puqueldón"] },
         "10.3": { nombre: "Provincia de Palena", comunas: ["Chaitén", "Futaleufú", "Palena", "Hualaihué"] },
-<<<<<<< HEAD
-=======
-        "1": { nombre: "Tarapacá", comunas: ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"] },
-        "13": { nombre: "Metropolitana", comunas: ["Santiago", "Puente Alto", "La Florida", "Maipú", "Providencia", "Las Condes", "Ñuñoa"] },
-        "8": { nombre: "Biobío", comunas: ["Concepción", "Talcahuano", "Chillán", "Los Ángeles", "Coronel", "Hualpén", "San Pedro de la Paz"] }
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     },
     servicios: {
         Instalacion: ["1 Deco", "2 Decos", "3 Decos", "4 Decos"],
@@ -27,7 +21,6 @@ const appData = {
         tecnicos: []
     },
     cargos: [],
-<<<<<<< HEAD
     empleados: [],
     articulos: {
         seriados: [],
@@ -37,17 +30,10 @@ const appData = {
     ingresosTarjetas: []    
 };
 let motivoSeleccionado = null;
-=======
-    departamentos: [],
-    empleados: []
-};
-let motivoSeleccionado = null; // { ordenId, motivo }
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 let ordenes = [];
 let paginaActual = 1;
 const filasPorPagina = 10;
 const TIPOS_RECHAZO = ["Cliente rechaza", "Sin moradores", "Direccion erronea", "Orden mal generada", "Servicio operativo"];
-<<<<<<< HEAD
 let datosReporteActual = [];
 let timeoutBienvenida = null;
 function esFechaFutura(fechaStr) {
@@ -73,9 +59,6 @@ function normalizarSerie(serie) {
     if (!serie) return '';
     return serie.toString().trim().replace(/\s+/g, '');
 }
-=======
-let datosReporteActual = []; // Guardará los datos filtrados para exportar
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 
 // =======================================================
 // --- Funciones de UI (Interfaz de Usuario) ---
@@ -88,10 +71,6 @@ function mostrarToast(mensaje, tipo = 'success') {
     contenedor.appendChild(toast);
     setTimeout(() => { toast.remove(); }, 4000);
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 // ==================================
 // --- Lógica de Login y Navegación ---
 // ==================================
@@ -100,7 +79,6 @@ function login() {
     const appContainer = document.getElementById('app-container');
     if (loginContainer) loginContainer.style.display = 'none';
     if (appContainer) appContainer.style.display = 'flex';
-<<<<<<< HEAD
     document.querySelectorAll('#main-nav button').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('#sidebar .submenu').forEach(s => s.classList.remove('active'));
     mostrarPanel('modulo-bienvenida');
@@ -128,35 +106,6 @@ function seleccionarModulo(moduloId) {
     const submenuActivo = document.getElementById(`submenu-${moduloId}`);
     if (submenuActivo) submenuActivo.classList.add('active');
     mostrarPanel('modulo-bienvenida');
-=======
-    
-    mostrarPanel('panel-bienvenida');
-    document.querySelectorAll('#main-nav button').forEach(b => b.classList.remove('active'));
-    const btnDth = document.querySelector('#main-nav button[data-module="dth"]');
-    if (btnDth) btnDth.classList.add('active');
-    
-    document.querySelectorAll('#sidebar .submenu').forEach(s => s.classList.remove('active'));
-    const submenuDth = document.getElementById('submenu-dth');
-    if (submenuDth) submenuDth.classList.add('active');
-}
-
-function seleccionarModulo(moduloId) {
-    document.querySelectorAll('#main-nav button').forEach(b => b.classList.remove('active'));
-    const botonActivo = document.querySelector(`#main-nav button[data-module="${moduloId}"]`);
-    if(botonActivo) botonActivo.classList.add('active');
-    
-    document.querySelectorAll('#sidebar .submenu').forEach(s => s.classList.remove('active'));
-    const submenuActivo = document.getElementById(`submenu-${moduloId}`);
-    if(submenuActivo) submenuActivo.classList.add('active');
-    
-    // Mostrar el primer panel del submenú o bienvenida si no hay paneles
-    const primerBotonDelSubmenu = submenuActivo?.querySelector('button[data-panel]');
-    if (primerBotonDelSubmenu) {
-        mostrarPanel(primerBotonDelSubmenu.dataset.panel);
-    } else {
-        mostrarPanel('panel-bienvenida');
-    }
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function mostrarPanel(panelId) {
@@ -167,7 +116,6 @@ function mostrarPanel(panelId) {
         return;
     }
     panelActivo.classList.add('active');
-<<<<<<< HEAD
     document.querySelectorAll('#main-content .content-panel').forEach(p => {
         p.style.display = (p.id === panelId) ? 'block' : 'none';
     });
@@ -214,10 +162,6 @@ function mostrarPanel(panelId) {
         case 'panel-ingreso-cliente':
             resetFormularioOrden();
             break;
-=======
-
-    switch (panelId) {
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
         case 'panel-agendadas':
             paginaActual = 1;
             if (appData.personal.tecnicos.length > 0) {
@@ -239,13 +183,8 @@ function mostrarPanel(panelId) {
             if (filtrosContainer) filtrosContainer.style.display = 'flex';
             aplicarFiltros();
             break;
-<<<<<<< HEAD
         case 'panel-ingreso-cliente':resetFormularioOrden(); break;
         case 'panel-gestion-cargos': renderGestionCargos(); break;
-=======
-        case 'panel-gestion-cargos': renderGestionCargos(); break;
-        case 'panel-gestion-departamentos': renderGestionDepartamentos(); break;
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
         case 'panel-lista-personal': renderTablaPersonal(); break;
         case 'panel-nuevo-ingreso': setupFormularioNuevoIngreso(); break;
         case 'panel-liquidadas': renderTablaLiquidadas(); break;
@@ -255,7 +194,6 @@ function mostrarPanel(panelId) {
             populateSelect(document.getElementById('filtro-reporte-region'), Object.values(appData.regiones).map(r => ({ value: r.nombre, text: r.nombre })), "Todas");
             populateSelect(document.getElementById('filtro-reporte-servicio'), Object.keys(appData.servicios).map(s => ({ value: s, text: s })), "Todos");
             document.getElementById('filtro-reporte-region').addEventListener('change', (e) => {
-<<<<<<< HEAD
                 const regionSeleccionada = Object.entries(appData.regiones).find(([key, val]) => val.nombre === e.target.value);
                 if (regionSeleccionada) {
                     const comunas = appData.regiones[regionSeleccionada[0]].comunas;
@@ -284,27 +222,11 @@ function mostrarPanel(panelId) {
             break;
     }
 }
-=======
-                 const regionSeleccionada = Object.entries(appData.regiones).find(([key, val]) => val.nombre === e.target.value);
-                 if (regionSeleccionada) {
-                    const comunas = appData.regiones[regionSeleccionada[0]].comunas;
-                    populateSelect(document.getElementById('filtro-reporte-comuna'), comunas.map(c => ({value: c, text: c})), "Todas");
-                 } else {
-                    document.getElementById('filtro-reporte-comuna').innerHTML = '<option value="">Todas</option>';
-                 }
-            });
-            aplicarFiltrosReporte(); 
-            break;
-    }
-}
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 // ============================================
 // --- Lógica del Formulario de Ingreso DTH ---
 // ============================================
 function validarNumeroOrden() {
     const numeroInput = document.getElementById('orden-numero');
-<<<<<<< HEAD
     const numero = numeroInput?.value.trim();
     if (!numero) return mostrarToast("Por favor, ingrese un número de orden.", "error");
     document.getElementById('paso-1').style.display = 'none';
@@ -366,38 +288,16 @@ function validarRutChileno(rutCompleto) {
     const rutLimpio = rutCompleto.replace(/\./g, '');
     if (!/^[0-9]+-[0-9kK]{1}$/.test(rutLimpio)) return false;
     let [cuerpo, dv] = rutLimpio.split('-');
-=======
-    if (!numeroInput) return;
-    const numero = numeroInput.value;
-    if (!numero) return mostrarToast("Por favor, ingrese un número de orden.", "error");
-    if (ordenes.some(o => o.numero === numero)) return mostrarToast(`La orden N° ${numero} ya existe.`, "error");
-    const formIngreso = document.getElementById('form-ingreso-orden');
-    const paso1 = document.getElementById('ingreso-paso-1');
-    if (formIngreso) formIngreso.style.display = 'block';
-    if (paso1) paso1.style.display = 'none';
-    const rutInput = document.getElementById('orden-rut');
-    if (rutInput) rutInput.focus();
-}
-
-function validarRutChileno(rut) {
-    if (!/^[0-9]+-[0-9kK]{1}$/.test(rut)) return false;
-    let [cuerpo, dv] = rut.split('-');
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     let suma = 0, multiplo = 2;
     for (let i = cuerpo.length - 1; i >= 0; i--) {
         suma += multiplo * cuerpo.charAt(i);
         multiplo = multiplo === 7 ? 2 : multiplo + 1;
     }
     const dvEsperado = 11 - (suma % 11);
-<<<<<<< HEAD
     dv = (dv.toLowerCase() === 'k') ?
     10 : parseInt(dv, 10);
     return dvEsperado === 11 ? dv === 0 : dvEsperado === 10 ?
     dv === 10 : dv === dvEsperado;
-=======
-    dv = (dv.toLowerCase() === 'k') ? 10 : parseInt(dv, 10);
-    return dvEsperado === 11 ? dv === 0 : dvEsperado === 10 ? dv === 10 : dv === dvEsperado;
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function validarRutInput(inputElement) {
@@ -423,7 +323,6 @@ function cargarSubServicio(selectSub, selectServicio) {
 }
 
 function resetFormularioOrden() {
-<<<<<<< HEAD
     const tituloIngreso = document.getElementById('titulo-ingreso-orden');
     if (tituloIngreso) {
         tituloIngreso.textContent = 'Ingreso Orden';
@@ -451,19 +350,6 @@ function resetFormularioOrden() {
     if (subServicioSelect) subServicioSelect.innerHTML = '<option value="">-- Seleccione Subservicio --</option>';
     const rutInput = document.getElementById('orden-rut');
     if (rutInput) rutInput.classList.remove('valid', 'invalid');
-=======
-    const form = document.getElementById('form-ingreso-orden');
-    if (form) form.reset();
-    if (form) form.style.display = 'none';
-    const paso1 = document.getElementById('ingreso-paso-1');
-    if (paso1) paso1.style.display = 'block';
-    const numInput = document.getElementById('orden-numero');
-    if (numInput) numInput.value = '';
-    const rutInput = document.getElementById('orden-rut');
-    if (rutInput) rutInput.classList.remove('valid', 'invalid');
-    cargarComunas(document.getElementById('orden-comuna'), document.getElementById('orden-region'));
-    cargarSubServicio(document.getElementById('orden-sub'), document.getElementById('orden-servicio'));
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function guardarOrden(event) {
@@ -475,11 +361,7 @@ function guardarOrden(event) {
     const numeroContacto = document.getElementById('numeroContacto')?.value.trim();
     const regionSelect = document.getElementById('orden-region');
     const regionId = regionSelect?.value;
-<<<<<<< HEAD
     const regionNombre = regionId ? appData.regiones[regionId]?.nombre : '';
-=======
-    const regionNombre = regionId ? regionSelect.options[regionSelect.selectedIndex].text : '';
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const comuna = document.getElementById('orden-comuna')?.value;
     const servicio = document.getElementById('orden-servicio')?.value;
     const subServicio = document.getElementById('orden-sub')?.value;
@@ -487,7 +369,6 @@ function guardarOrden(event) {
     const tecnico = document.getElementById('orden-tecnico')?.value;
     const despacho = document.getElementById('orden-despacho')?.value;
     const observacion = document.getElementById('orden-observacion')?.value.trim();
-<<<<<<< HEAD
     if (!numero || !rut || !nombre || !direccion || !regionId || !comuna || !servicio || !subServicio || !fecha || !despacho) {
     return mostrarToast("Todos los campos marcados son obligatorios (excepto Técnico).", "error");
     }
@@ -514,28 +395,10 @@ function guardarOrden(event) {
     };
     ordenes.unshift(nuevaOrden);
     localStorage.setItem('ordenes', JSON.stringify(ordenes));
-=======
-
-    if (!numero || !rut || !nombre || !direccion || !regionId || !comuna || !servicio || !subServicio || !fecha || !tecnico || !despacho) {
-        return mostrarToast("Todos los campos marcados son obligatorios.", "error");
-    }
-    if (!validarRutChileno(rut)) return mostrarToast("RUT inválido.", "error");
-
-    const nuevaOrden = {
-        id: `orden-${Date.now()}`, numero, rut, nombre, direccion, numeroContacto, 
-        region: regionNombre, comuna, servicio, subServicio, fecha, tecnico, despacho, observacion,
-        estado: 'Agendada'
-    };
-    ordenes.unshift(nuevaOrden);
-    function guardarOrdenesFirebase() {
-    db.ref('ordenes').set(ordenes);
-    }
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     mostrarToast(`Orden N° ${numero} guardada con éxito.`, "success");
     resetFormularioOrden();
     mostrarPanel('panel-agendadas');
 }
-<<<<<<< HEAD
 function abrirEdicionOrden(ordenId) {
     const orden = ordenes.find(o => o.id === ordenId);
     if (!orden) {
@@ -618,8 +481,6 @@ function guardarEdicionOrden(event) {
     mostrarToast("Orden actualizada con éxito.", "success");
     mostrarPanel('panel-agendadas');
 }
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 
 // ============================================
 // --- Lógica del Panel "Agendadas" y Filtros ---
@@ -627,13 +488,8 @@ function guardarEdicionOrden(event) {
 function renderTablaAgendadas(datos) {
     const tbody = document.querySelector("#tabla-agendadas tbody");
     if (!tbody) return;
-<<<<<<< HEAD
     const datosParaMostrar = datos || ordenes.filter(o => o.estado === 'Agendada');
     tbody.innerHTML = "";
-=======
-    tbody.innerHTML = "";
-    const datosParaMostrar = datos || ordenes.filter(o => o.estado === 'Agendada');
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     if (datosParaMostrar.length === 0) {
         tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;">No se encontraron órdenes agendadas.</td></tr>`;
         const paginacion = document.getElementById("paginacion");
@@ -646,11 +502,7 @@ function renderTablaAgendadas(datos) {
     datosPaginados.forEach(o => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-<<<<<<< HEAD
             <td><button class="btn-link-orden" data-id="${o.id}">${o.numero}</button></td>
-=======
-            <td>${o.numero}</td>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
             <td>${o.fecha}</td>
             <td>${o.subServicio}</td>
             <td>${o.nombre}</td>
@@ -670,7 +522,6 @@ function renderTablaAgendadas(datos) {
         `;
         tbody.appendChild(tr);
     });
-<<<<<<< HEAD
     tbody.querySelectorAll('.btn-link-orden').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -679,15 +530,10 @@ function renderTablaAgendadas(datos) {
     });
     tbody.querySelectorAll('.btn-liquidar').forEach(btn => {
         btn.addEventListener('click', () => cambiarEstadoOrden(btn.dataset.id, "Liquidadas"));
-=======
-    tbody.querySelectorAll('.btn-liquidar').forEach(btn => {
-        btn.addEventListener('click', () => cambiarEstadoOrden(btn.dataset.id, 'Liquidadas'));
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     });
     tbody.querySelectorAll('.btn-rechazar').forEach(btn => {
         btn.addEventListener('click', () => abrirMotivoRechazo(btn.dataset.id));
     });
-<<<<<<< HEAD
     const totalPaginas = Math.ceil(datosParaMostrar.length / filasPorPagina);
     const cont = document.getElementById("paginacion");
     if (cont) {
@@ -703,9 +549,6 @@ function renderTablaAgendadas(datos) {
             cont.appendChild(btn);
         }
     }
-=======
-    renderPaginacion(datosParaMostrar.length);
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function renderPaginacion(totalFilas) {
@@ -732,10 +575,6 @@ function aplicarFiltros() {
     const comunaEl = document.getElementById('filtro-comuna');
     const servicioEl = document.getElementById('filtro-servicio');
     const fechaEl = document.getElementById('filtro-fecha');
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const termino = terminoEl?.value.toLowerCase() || '';
     const tecnico = tecnicoEl?.value || '';
     const regionNum = regionEl?.value || '';
@@ -743,10 +582,6 @@ function aplicarFiltros() {
     const comuna = comunaEl?.value || '';
     const servicio = servicioEl?.value || '';
     const fecha = fechaEl?.value || '';
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     let resultados = ordenes.filter(o => 
         o.estado === 'Agendada' &&
         (termino === '' || o.numero.toLowerCase().includes(termino) || o.rut.toLowerCase().includes(termino) || o.nombre.toLowerCase().includes(termino)) &&
@@ -785,7 +620,6 @@ function enviarPorCorreo() {
     const tecnico = appData.empleados.find(emp => `${emp.nombre1} ${emp.apepaterno}` === tecnicoFiltrado && emp.activo);
     if (!tecnico || !tecnico.email) return mostrarToast(`No se encontró email para el técnico ${tecnicoFiltrado}.`, "error");
     const filas = document.querySelectorAll("#tabla-agendadas tbody tr");
-<<<<<<< HEAD
     if (filas.length === 0 || filas[0].children.length < 2)
         return mostrarToast("No hay órdenes para enviar.", "error");
 
@@ -823,21 +657,6 @@ function enviarPorCorreo() {
             console.error("Error al enviar correo:", error);
             mostrarToast("No se pudo enviar el correo. Revisar consola.", "error");
         });
-=======
-    if (filas.length === 0 || filas[0].children.length < 2) return mostrarToast("No hay órdenes para enviar.", "error");
-    let cuerpo = `Hola ${tecnico.nombre1},\nTienes las siguientes órdenes asignadas:\n`;
-    filas.forEach((fila, index) => {
-        const numero = fila.children[0].textContent;
-        const fecha = fila.children[1].textContent;
-        const cliente = fila.children[3].textContent;
-        const direccion = fila.children[5].textContent;
-        cuerpo += `${index + 1}. Orden #${numero} - ${fecha}\n   Cliente: ${cliente}\n   Dirección: ${direccion}\n`;
-    });
-    cuerpo += "Saludos.";
-    const asunto = encodeURIComponent("Tus Órdenes de Trabajo – Sistema de Gestión");
-    const body = encodeURIComponent(cuerpo);
-    window.location.href = `mailto:${tecnico.email}?subject=${asunto}&body=${body}`;
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function enviarPorWhatsapp() {
@@ -845,15 +664,11 @@ function enviarPorWhatsapp() {
     if (!tecnicoFiltrado) return mostrarToast("Seleccione un técnico en los filtros.", "error");
     const tecnico = appData.empleados.find(emp => `${emp.nombre1} ${emp.apepaterno}` === tecnicoFiltrado && emp.activo);
     if (!tecnico || !tecnico.telefono) return mostrarToast(`No se encontró teléfono para el técnico ${tecnicoFiltrado}.`, "error");
-<<<<<<< HEAD
 
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     let numero = tecnico.telefono.replace(/\D/g, '');
     if (numero.length === 9 && numero.startsWith('9')) {
         numero = '56' + numero;
     }
-<<<<<<< HEAD
 
     const filas = document.querySelectorAll("#tabla-agendadas tbody tr");
     if (filas.length === 0 || filas[0].children.length < 2) return mostrarToast("No hay órdenes para enviar.", "error");
@@ -880,18 +695,6 @@ function enviarPorWhatsapp() {
 `;
     });
     mensaje += "¡Éxito en el terreno!";
-=======
-    const filas = document.querySelectorAll("#tabla-agendadas tbody tr");
-    if (filas.length === 0 || filas[0].children.length < 2) return mostrarToast("No hay órdenes para enviar.", "error");
-    let mensaje = `Hola ${tecnico.nombre1}, tienes ${filas.length} órdenes:\n`;
-    filas.forEach(fila => {
-        const num = fila.children[0].textContent;
-        const fecha = fila.children[1].textContent;
-        const cliente = fila.children[3].textContent;
-        mensaje += `• #${num} | ${fecha} | ${cliente}\n`;
-    });
-    mensaje += `\n¡Éxito en el terreno!`;
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
 }
@@ -909,10 +712,6 @@ function buscarPorOrden() {
     resultadoDiv.innerHTML = orden ?
         `<p><strong>N° Orden:</strong> ${orden.numero}</p><p><strong>Cliente:</strong> ${orden.nombre}</p><p><strong>Estado:</strong> ${orden.estado}</p>` : `<p>Orden no encontrada.</p>`;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 function buscarPorRut() {
     const input = document.getElementById('buscar-rut-input');
     const resultadoDiv = document.getElementById('resultado-rut');
@@ -925,7 +724,6 @@ function buscarPorRut() {
         `<p>No se encontraron órdenes para el RUT.</p>`;
 }
 
-<<<<<<< HEAD
 function buscarColaborador() {
     const input = document.getElementById('buscar-colab-input');
     const resultadoDiv = document.getElementById('resultado-busqueda-colab');
@@ -973,8 +771,6 @@ function buscarColaborador() {
     });
 }
 
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 // ============================================
 // --- Lógica del Módulo RRHH ---
 // ============================================
@@ -997,28 +793,6 @@ function renderGestionCargos() {
     });
 }
 
-<<<<<<< HEAD
-=======
-function renderGestionDepartamentos() {
-    const lista = document.getElementById('lista-departamentos');
-    if (!lista) return;
-    lista.innerHTML = "";
-    if (appData.departamentos.length === 0) {
-        lista.innerHTML = `<li style="text-align: center; color: #666;">No hay departamentos definidos.</li>`;
-        return;
-    }
-    appData.departamentos.forEach(dpto => {
-        const li = document.createElement('li');
-        li.className = 'lista-gestion-item';
-        li.innerHTML = `<span>${dpto.nombre}</span><button class="btn-eliminar" data-id="${dpto.id}">Eliminar</button>`;
-        lista.appendChild(li);
-    });
-    lista.querySelectorAll('.btn-eliminar').forEach(btn => {
-        btn.addEventListener('click', () => eliminarDepartamento(btn.dataset.id));
-    });
-}
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 function renderTablaPersonal() {
     const tbody = document.querySelector("#tabla-personal tbody");
     if (!tbody) return;
@@ -1035,7 +809,6 @@ function renderTablaPersonal() {
             <td>${emp.rut}</td>
             <td>${cargo ? cargo.nombre : 'No asignado'}</td>
             <td>${emp.fechaIngreso}</td>
-<<<<<<< HEAD
             <td>
                 <div class="acciones-celda">
                     <button class="btn-editar" data-id="${emp.id}">✏️ Editar</button>
@@ -1064,15 +837,6 @@ function renderTablaPersonal() {
             }
         });
     });
-=======
-            <td><button class="btn-editar" data-id="${emp.id}">✏️ Editar</button></td>
-        `;
-        tbody.appendChild(tr);
-    });
-    tbody.querySelectorAll('.btn-editar').forEach(btn => {
-        btn.addEventListener('click', () => abrirEdicionEmpleado(btn.dataset.id));
-    });
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function agregarCargo() {
@@ -1091,7 +855,6 @@ function agregarCargo() {
 }
 
 function eliminarCargo(cargoId) {
-<<<<<<< HEAD
     const cargosEsenciales = [
         'cargo-tecnico', 'cargo-despacho', 'cargo-supervisor',
         'cargo-enc-bodega', 'cargo-enc-rrhh', 'cargo-jefatura', 'cargo-admin'
@@ -1101,10 +864,6 @@ function eliminarCargo(cargoId) {
     }
     if (appData.empleados.some(emp => emp.cargoId === cargoId)) {
         return mostrarToast("No se puede eliminar, el cargo está en uso por un colaborador.", "error");
-=======
-    if (appData.empleados.some(emp => emp.cargoId === cargoId)) {
-        return mostrarToast("No se puede eliminar, el cargo está en uso.", "error");
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     }
     if (confirm("¿Está seguro de que desea eliminar este cargo?")) {
         appData.cargos = appData.cargos.filter(c => c.id !== cargoId);
@@ -1114,7 +873,6 @@ function eliminarCargo(cargoId) {
     }
 }
 
-<<<<<<< HEAD
 function setupFormularioNuevoIngreso() {
     const empCargo = document.getElementById('emp-cargo');
     const grupoLicencia = document.getElementById('grupo-licencia-tecnico');
@@ -1136,54 +894,11 @@ function setupFormularioNuevoIngreso() {
             }
         });
     }
-=======
-function agregarDepartamento() {
-    const input = document.getElementById('nuevo-dpto-nombre');
-    if (!input) return;
-    const nombre = input.value.trim();
-    if (!nombre) return mostrarToast("Debe ingresar un nombre.", "error");
-    if (appData.departamentos.some(d => d.nombre.toLowerCase() === nombre.toLowerCase())) {
-        return mostrarToast("Ese departamento ya existe.", "error");
-    }
-    appData.departamentos.push({ id: `dpto-${Date.now()}`, nombre });
-    guardarDatosRRHH();
-    renderGestionDepartamentos();
-    input.value = "";
-    mostrarToast("Departamento agregado con éxito.");
-}
-
-function eliminarDepartamento(dptoId) {
-    if (appData.empleados.some(emp => emp.dptoId === dptoId)) {
-        return mostrarToast("No se puede eliminar, el departamento está en uso.", "error");
-    }
-    if (confirm("¿Está seguro de que desea eliminar este departamento?")) {
-        appData.departamentos = appData.departamentos.filter(d => d.id !== dptoId);
-        guardarDatosRRHH();
-        renderGestionDepartamentos();
-        mostrarToast("Departamento eliminado.");
-    }
-}
-
-function setupFormularioNuevoIngreso() {
-    const empCargo = document.getElementById('emp-cargo');
-    const empDpto = document.getElementById('emp-dpto');
-    const empRegion = document.getElementById('emp-region');
-    const empComuna = document.getElementById('emp-comuna');
-
-    if (empCargo) populateSelect(empCargo, appData.cargos.map(c => ({ value: c.id, text: c.nombre })), "Seleccione Cargo");
-    if (empDpto) populateSelect(empDpto, appData.departamentos.map(d => ({ value: d.id, text: d.nombre })), "Seleccione Depto.");
-    if (empRegion) {
-        populateSelect(empRegion, Object.keys(appData.regiones).map(num => ({ value: num, text: appData.regiones[num].nombre })), "Seleccione Región");
-        empRegion.onchange = () => cargarComunas(empComuna, empRegion);
-    }
-    if (empComuna) empComuna.innerHTML = "<option value=''>-- Seleccione Comuna --</option>";
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 function guardarNuevoEmpleado(event) {
     event.preventDefault();
     const rut = document.getElementById('emp-rut')?.value.trim();
-<<<<<<< HEAD
     if (!rut || !validarRutChileno(rut)) return mostrarToast("El RUT es obligatorio y debe ser válido.", "error");
     if (appData.empleados.some(e => e.rut === rut)) return mostrarToast("El RUT ya está registrado.", "error");
     const cargoId = document.getElementById('emp-cargo')?.value;
@@ -1229,39 +944,6 @@ function guardarNuevoEmpleado(event) {
     mostrarToast("Colaborador guardado con éxito.");
     if (esTecnico) cargarTecnicosAsignacion();
     document.getElementById('form-nuevo-ingreso').reset();
-=======
-    const cargoId = document.getElementById('emp-cargo')?.value;
-    const dptoId = document.getElementById('emp-dpto')?.value;
-    if (!rut || !validarRutChileno(rut)) return mostrarToast("El RUT es obligatorio y debe ser válido.", "error");
-    if (appData.empleados.some(e => e.rut === rut)) return mostrarToast("El RUT ya está registrado.", "error");
-    if (!cargoId || !dptoId) return mostrarToast("Debe seleccionar un cargo y un departamento.", "error");
-
-    const nuevoEmpleado = {
-        id: `emp-${Date.now()}`,
-        nombre1: document.getElementById('emp-nombre1')?.value || '',
-        nombre2: document.getElementById('emp-nombre2')?.value || '',
-        apepaterno: document.getElementById('emp-apepaterno')?.value || '',
-        apematerno: document.getElementById('emp-apematerno')?.value || '',
-        rut,
-        telefono: document.getElementById('emp-telefono')?.value || '',
-        direccion: document.getElementById('emp-direccion')?.value || '',
-        region: document.getElementById('emp-region')?.options[document.getElementById('emp-region')?.selectedIndex]?.text || '',
-        comuna: document.getElementById('emp-comuna')?.value || '',
-        fechaNacimiento: document.getElementById('emp-fecha-nac')?.value || '',
-        email: document.getElementById('emp-email')?.value || '',
-        cargoId,
-        dptoId,
-        fechaIngreso: document.getElementById('emp-fecha-ingreso')?.value || '',
-        observacion: document.getElementById('emp-observacion')?.value || '',
-        activo: document.getElementById('emp-activo')?.checked ?? false
-    };
-    appData.empleados.push(nuevoEmpleado);
-    guardarDatosRRHH();
-    actualizarPersonalDTH();
-    mostrarToast("Empleado guardado con éxito.");
-    const form = document.getElementById('form-nuevo-ingreso');
-    if (form) form.reset();
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     mostrarPanel('panel-lista-personal');
 }
 
@@ -1271,10 +953,6 @@ function guardarNuevoEmpleado(event) {
 function abrirEdicionEmpleado(empleadoId) {
     const empleado = appData.empleados.find(e => e.id === empleadoId);
     if (!empleado) return mostrarToast("Empleado no encontrado.", "error");
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     document.getElementById('editar-empleado-id').value = empleado.id;
     document.getElementById('editar-nombre1').value = empleado.nombre1;
     document.getElementById('editar-nombre2').value = empleado.nombre2 || '';
@@ -1287,7 +965,6 @@ function abrirEdicionEmpleado(empleadoId) {
     document.getElementById('editar-email').value = empleado.email || '';
     document.getElementById('editar-fecha-ingreso').value = empleado.fechaIngreso;
     document.getElementById('editar-observacion').value = empleado.observacion || '';
-<<<<<<< HEAD
     populateSelect(document.getElementById('editar-cargo'), appData.cargos.map(c => ({ value: c.id, text: c.nombre })), "Seleccione Cargo");
     populateSelect(document.getElementById('editar-region'), Object.keys(appData.regiones).map(num => ({ value: num, text: appData.regiones[num].nombre })), "Seleccione Región");
     document.getElementById('editar-cargo').value = empleado.cargoId;
@@ -1313,24 +990,6 @@ function abrirEdicionEmpleado(empleadoId) {
         grupoLicenciaEdit.style.display = 'none';
         fechaLicenciaEdit.value = '';
     }
-=======
-    document.getElementById('editar-activo').checked = empleado.activo;
-
-    populateSelect(document.getElementById('editar-cargo'), appData.cargos.map(c => ({ value: c.id, text: c.nombre })), "Seleccione Cargo");
-    populateSelect(document.getElementById('editar-dpto'), appData.departamentos.map(d => ({ value: d.id, text: d.nombre })), "Seleccione Depto.");
-    populateSelect(document.getElementById('editar-region'), Object.keys(appData.regiones).map(num => ({ value: num, text: appData.regiones[num].nombre })), "Seleccione Región");
-
-    document.getElementById('editar-cargo').value = empleado.cargoId;
-    document.getElementById('editar-dpto').value = empleado.dptoId;
-    const regionKey = Object.keys(appData.regiones).find(num => appData.regiones[num].nombre === empleado.region) || '';
-    document.getElementById('editar-region').value = regionKey;
-
-    const regionSelect = document.getElementById('editar-region');
-    const comunaSelect = document.getElementById('editar-comuna');
-    cargarComunas(comunaSelect, regionSelect);
-    setTimeout(() => { comunaSelect.value = empleado.comuna || ''; }, 10);
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     mostrarPanel('panel-editar-empleado');
 }
 
@@ -1340,7 +999,6 @@ function guardarEdicionEmpleado(event) {
     const rut = document.getElementById('editar-rut')?.value.trim();
     if (!id) return mostrarToast("Error: ID no válido.", "error");
     if (!rut || !validarRutChileno(rut)) return mostrarToast("RUT inválido.", "error");
-<<<<<<< HEAD
     if (appData.empleados.some(e => e.rut === rut && e.id !== id)) {
         return mostrarToast("El RUT ya está registrado en otro colaborador.", "error");
     }
@@ -1395,35 +1053,6 @@ function guardarEdicionEmpleado(event) {
     guardarDatosRRHH();
     actualizarPersonalDTH();
     mostrarToast("Colaborador actualizado con éxito.");
-=======
-    if (appData.empleados.some(e => e.rut === rut && e.id !== id)) return mostrarToast("El RUT ya está registrado en otro empleado.", "error");
-
-    const index = appData.empleados.findIndex(e => e.id === id);
-    if (index === -1) return mostrarToast("Empleado no encontrado.", "error");
-
-    appData.empleados[index] = {
-        ...appData.empleados[index],
-        nombre1: document.getElementById('editar-nombre1')?.value || '',
-        nombre2: document.getElementById('editar-nombre2')?.value || '',
-        apepaterno: document.getElementById('editar-apepaterno')?.value || '',
-        apematerno: document.getElementById('editar-apematerno')?.value || '',
-        rut,
-        telefono: document.getElementById('editar-telefono')?.value || '',
-        direccion: document.getElementById('editar-direccion')?.value || '',
-        region: document.getElementById('editar-region')?.options[document.getElementById('editar-region')?.selectedIndex]?.text || '',
-        comuna: document.getElementById('editar-comuna')?.value || '',
-        fechaNacimiento: document.getElementById('editar-fecha-nac')?.value || '',
-        email: document.getElementById('editar-email')?.value || '',
-        cargoId: document.getElementById('editar-cargo')?.value || '',
-        dptoId: document.getElementById('editar-dpto')?.value || '',
-        fechaIngreso: document.getElementById('editar-fecha-ingreso')?.value || '',
-        observacion: document.getElementById('editar-observacion')?.value || '',
-        activo: document.getElementById('editar-activo')?.checked ?? false
-    };
-    guardarDatosRRHH();
-    actualizarPersonalDTH();
-    mostrarToast("Empleado actualizado con éxito.");
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     mostrarPanel('panel-lista-personal');
 }
 
@@ -1448,31 +1077,19 @@ function cambiarEstadoOrden(ordenId, nuevoEstado) {
 function abrirMotivoRechazo(ordenId) {
     const modal = document.createElement('div');
     modal.id = 'modal-rechazo';
-<<<<<<< HEAD
     modal.style = `position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
 z-index: 2000;`;
-=======
-    modal.style = `position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000;`;
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     modal.innerHTML = `
         <div style="background: white; padding: 20px; border-radius: 10px; max-width: 350px; width: 90%;">
             <h3 style="margin-top: 0; text-align: center;">Motivo de Rechazo</h3>
             <div id="motivos-container" style="display: flex; flex-direction: column; gap: 8px; margin: 15px 0;">
-<<<<<<< HEAD
                 ${TIPOS_RECHAZO.map(motivo => `<button type="button" data-motivo="${motivo}" style="background: #f8f9fa; border: 1px solid #ddd; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 14px; transition: 
                 all 0.2s;">${motivo}</button>`).join('')}
-=======
-                ${TIPOS_RECHAZO.map(motivo => `<button type="button" data-motivo="${motivo}" style="background: #f8f9fa; border: 1px solid #ddd; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 14px; transition: all 0.2s;">${motivo}</button>`).join('')}
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
             </div>
             <div>
                 <label for="observacion-rechazo" style="display: block; margin-bottom: 6px; font-weight: 600;">Observación (mínimo 5 caracteres):</label>
                 <textarea id="observacion-rechazo" placeholder="Ej: Cliente no estaba en casa..." style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; min-height: 60px;"></textarea>
-<<<<<<< HEAD
                 <div id="error-observacion"style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">La observación es obligatoria.</div>
-=======
-                <div id="error-observacion" style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">La observación es obligatoria.</div>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
             </div>
             <div style="text-align: right; margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
                 <button type="button" id="btnCancelarRechazo" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">Cancelar</button>
@@ -1489,27 +1106,20 @@ z-index: 2000;`;
     const motivosContainer = document.getElementById('motivos-container');
     if (motivosContainer) {
         motivosContainer.addEventListener('click', (e) => {
-<<<<<<< HEAD
         
-    if (e.target.tagName === 'BUTTON') {
-=======
-            if (e.target.tagName === 'BUTTON') {
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
+ 
+     if (e.target.tagName === 'BUTTON') {
                 seleccionarMotivoRechazo(ordenId, e.target.dataset.motivo);
                 document.querySelectorAll('#motivos-container button').forEach(btn => {
                     btn.style.background = btn === e.target ? '#007bff' : '#f8f9fa';
-                    btn.style.color = btn === e.target ? 'white' : 'black';
+                    btn.style.color = btn === e.target ? 'white' 
+ : 
+ 'black';
                 });
-<<<<<<< HEAD
-}
-        });
-    }
-=======
-            }
+ }
         });
     }
 
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const obsTextarea = document.getElementById('observacion-rechazo');
     if (obsTextarea) obsTextarea.addEventListener('input', validarObservacionRechazo);
 }
@@ -1566,7 +1176,6 @@ function cerrarModalRechazo() {
 // ==============================
 // --- Paneles Liquidadas y Rechazadas ---
 // ==============================
-<<<<<<< HEAD
 function renderTablaLiquidadas() {
     const tbody = document.querySelector("#tabla-liquidadas tbody");
     if (!tbody) return;
@@ -1579,21 +1188,11 @@ function renderTablaLiquidadas() {
     if (fin) liquidadas = liquidadas.filter(o => o.fecha <= fin);
 
     tbody.innerHTML = "";
-=======
-function renderTablaLiquidadas(datos) {
-    const tbody = document.querySelector("#tabla-liquidadas tbody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    const liquidadas = datos || ordenes.filter(o => o.estado === "Liquidadas");
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     if (liquidadas.length === 0) {
         tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;">No hay órdenes liquidadas.</td></tr>`;
         return;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     liquidadas.forEach(o => {
         const tr = document.createElement("tr");
         tr.innerHTML = `<td>${o.numero}</td><td>${o.fecha}</td><td>${o.nombre}</td><td>${o.rut}</td><td>${o.direccion}</td><td>${o.tecnico}</td><td>Liquidadas</td>`;
@@ -1601,7 +1200,6 @@ function renderTablaLiquidadas(datos) {
     });
 }
 
-<<<<<<< HEAD
 function renderTablaRechazadas() {
     const tbody = document.querySelector("#tabla-rechazadas tbody");
     if (!tbody) return;
@@ -1614,21 +1212,11 @@ function renderTablaRechazadas() {
     if (fin) rechazadas = rechazadas.filter(o => o.fecha <= fin);
 
     tbody.innerHTML = "";
-=======
-function renderTablaRechazadas(datos) {
-    const tbody = document.querySelector("#tabla-rechazadas tbody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    const rechazadas = datos || ordenes.filter(o => o.estado === "Rechazada");
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     if (rechazadas.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;">No hay órdenes rechazadas.</td></tr>`;
         return;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     rechazadas.forEach(o => {
         const tr = document.createElement("tr");
         const motivoCompleto = o.observacionRechazo ? `${o.motivoRechazo} — ${o.observacionRechazo}` : o.motivoRechazo;
@@ -1679,7 +1267,6 @@ function exportarExcelRRHH(tipo) {
     const wb = XLSX.utils.book_new();
     const ws_data = empleadosFiltrados.map(e => {
         const cargo = appData.cargos.find(c => c.id === e.cargoId);
-<<<<<<< HEAD
         return {
             "RUT": e.rut, "Nombre": `${e.nombre1} ${e.nombre2 || ''} ${e.apepaterno} ${e.apematerno}`.trim(),
             "Cargo": cargo ? cargo.nombre : '', "Fecha Ingreso": e.fechaIngreso, "Teléfono": e.telefono || '', "Email": e.email || '',
@@ -1687,17 +1274,6 @@ function exportarExcelRRHH(tipo) {
         };
     });
 const ws = XLSX.utils.json_to_sheet(ws_data);
-=======
-        const dpto = appData.departamentos.find(d => d.id === e.dptoId);
-        return {
-            "RUT": e.rut, "Nombre": `${e.nombre1} ${e.nombre2 || ''} ${e.apepaterno} ${e.apematerno}`.trim(),
-            "Cargo": cargo ? cargo.nombre : '', "Departamento": dpto ? dpto.nombre : '',
-            "Fecha Ingreso": e.fechaIngreso, "Teléfono": e.telefono || '', "Email": e.email || '',
-            "Estado": e.activo ? "Activo" : "Inactivo"
-        };
-    });
-    const ws = XLSX.utils.json_to_sheet(ws_data);
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     XLSX.utils.book_append_sheet(wb, ws, "RRHH");
     XLSX.writeFile(wb, `Reporte_RRHH_${tipo}.xlsx`);
 }
@@ -1707,10 +1283,6 @@ const ws = XLSX.utils.json_to_sheet(ws_data);
 // =================================================================
 
 let graficoTecnicos = null;
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 function aplicarFiltrosReporte() {
     const tecnico = document.getElementById('filtro-reporte-tecnico')?.value || '';
     const region = document.getElementById('filtro-reporte-region')?.value || '';
@@ -1719,10 +1291,6 @@ function aplicarFiltrosReporte() {
     const servicio = document.getElementById('filtro-reporte-servicio')?.value || '';
     const fechaInicio = document.getElementById('filtro-reporte-fecha-inicio')?.value || '';
     const fechaFin = document.getElementById('filtro-reporte-fecha-fin')?.value || '';
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     datosReporteActual = ordenes.filter(d => 
         (!tecnico || d.tecnico === tecnico) && 
         (!region || d.region === region) &&
@@ -1738,18 +1306,8 @@ function aplicarFiltrosReporte() {
 
 function renderizarPivotTable(datos) {
     const container = $("#pivot-table-container");
-<<<<<<< HEAD
     if (!datos || datos.length === 0) {
         container.empty().append("<p style='text-align: center; color: #666; margin-top: 50px;'>No hay datos para mostrar con los filtros seleccionados.</p>");
-=======
-
-    // ===== CAMBIO CLAVE: MANEJO DE DATOS VACÍOS =====
-    if (!datos || datos.length === 0) {
-        // Limpia el contenedor y muestra un mensaje
-        container.empty().append("<p style='text-align: center; color: #666; margin-top: 50px;'>No hay datos para mostrar con los filtros seleccionados.</p>");
-        
-        // Limpia también el gráfico
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
         if (graficoTecnicos) {
             graficoTecnicos.destroy();
             graficoTecnicos = null;
@@ -1759,15 +1317,8 @@ function renderizarPivotTable(datos) {
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-<<<<<<< HEAD
         return;
     }
-=======
-        return; // Detiene la ejecución para no llamar a pivotUI
-    }
-    // =================================================
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     container.pivotUI(
         datos,
         {
@@ -1779,11 +1330,7 @@ function renderizarPivotTable(datos) {
                 actualizarGraficoDesdePivot(config);
             }
         },
-<<<<<<< HEAD
         true
-=======
-        true // sobreescribir
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     );
 }
 
@@ -1791,10 +1338,6 @@ function actualizarGraficoDesdePivot(pivotConfig) {
     const canvas = document.getElementById('grafico-tecnicos');
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
-<<<<<<< HEAD
-=======
-    
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     if (graficoTecnicos) {
         graficoTecnicos.destroy();
         graficoTecnicos = null;
@@ -1802,11 +1345,6 @@ function actualizarGraficoDesdePivot(pivotConfig) {
     
     const pivotData = pivotConfig.data;
     const rowKeys = pivotData.getRowKeys();
-<<<<<<< HEAD
-=======
-    
-    // Si no hay filas en la tabla pivote, no hay nada que graficar
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     if (rowKeys.length === 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         return;
@@ -1814,10 +1352,6 @@ function actualizarGraficoDesdePivot(pivotConfig) {
 
     const colKeys = pivotData.getColKeys();
     const labels = rowKeys.map(key => key.join('-') || 'Total');
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const datasets = colKeys.map((colKey) => {
         const label = colKey.join('-') || 'Total';
         const color = getColorForLabel(label);
@@ -1827,10 +1361,6 @@ function actualizarGraficoDesdePivot(pivotConfig) {
             backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.7)`
         };
     });
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     graficoTecnicos = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1845,12 +1375,8 @@ function actualizarGraficoDesdePivot(pivotConfig) {
                 x: { stacked: true }
             },
             plugins: {
-<<<<<<< HEAD
                 legend: { position: 'top' 
     },
-=======
-                legend: { position: 'top' },
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 tooltip: { mode: 'index', intersect: false }
             }
         }
@@ -1909,11 +1435,7 @@ function actualizarPersonalDTH() {
             if (cargo) {
                 const nombreCompleto = `${emp.nombre1} ${emp.apepaterno}`;
                 if (cargo.nombre.toLowerCase().includes('tecnico') || cargo.nombre.toLowerCase().includes('técnico')) {
-<<<<<<< HEAD
         appData.personal.tecnicos.push(nombreCompleto);
-=======
-                    appData.personal.tecnicos.push(nombreCompleto);
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 }
                 if (cargo.nombre.toLowerCase().includes('despacho')) {
                     appData.personal.despacho.push(nombreCompleto);
@@ -1929,17 +1451,12 @@ function actualizarPersonalDTH() {
 
 function guardarDatosRRHH() {
     localStorage.setItem("rrhhData", JSON.stringify({
-<<<<<<< HEAD
         cargos: appData.cargos,
         empleados: appData.empleados
-=======
-        cargos: appData.cargos, departamentos: appData.departamentos, empleados: appData.empleados
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     }));
 }
 
 function cargarDatos() {
-<<<<<<< HEAD
     const ordenesGuardadas = localStorage.getItem('ordenes');
     if (ordenesGuardadas) {
         try {
@@ -1951,14 +1468,10 @@ function cargarDatos() {
     } else {
         ordenes = [];
     }
-=======
-    // 1. Cargar datos de RRHH desde localStorage
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const rrhhData = localStorage.getItem("rrhhData");
     if (rrhhData) {
         const datos = JSON.parse(rrhhData);
         appData.cargos = datos.cargos || [];
-<<<<<<< HEAD
         appData.empleados = datos.empleados || [];
     } else {
         appData.empleados = [];
@@ -1980,28 +1493,6 @@ function cargarDatos() {
     appData.empleados.forEach(emp => {
         if (!emp.stock) emp.stock = { equipos: [], tarjetas: [] };
     });
-=======
-        appData.departamentos = datos.departamentos || [];
-        appData.empleados = datos.empleados || [];
-    } else {
-        appData.cargos = [{ id: 'cargo-1', nombre: 'Técnico' }, { id: 'cargo-2', nombre: 'Despacho' }];
-        appData.departamentos = [{ id: 'dpto-1', nombre: 'Operaciones' }];
-    }
-
-    // 2. Cargar órdenes desde localStorage (para pruebas locales)
-    const ordenesGuardadas = localStorage.getItem("ordenes"); // ✅ Ahora SÍ está definida
-    if (ordenesGuardadas) {
-        ordenes = JSON.parse(ordenesGuardadas);
-    }
-
-    // 3. (Opcional) Si usas Firebase, descomenta esto:
-    /*
-    db.ref('ordenes').once('value', (snapshot) => {
-        ordenes = snapshot.val() || [];
-        // Aquí podrías refrescar las tablas si es necesario
-    });
-    */
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }
 
 // ============================================
@@ -2019,7 +1510,6 @@ function populateSelect(selectElement, optionsArray, placeholder) {
 }
 
 // ============================================
-<<<<<<< HEAD
 // --- Funciones Ingreso articulo ---
 // ============================================
 function mostrarFormularioCreacion(tipo) {
@@ -2763,13 +2253,10 @@ async function enviarCorreoAsignacion(tecnico, tipo, codigo, detalle, guia) {
     }
 }
 // ============================================
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 // --- INICIALIZACIÓN DE LA APLICACIÓN ---
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatos();
-<<<<<<< HEAD
     cargarDatosLogistica();
     try {
         const ingresosSeriadosData = localStorage.getItem('ingresosSeriados');
@@ -2803,23 +2290,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- FIN DEL BLOQUE ---
     // =======================================================
     actualizarPersonalDTH();
-=======
-    actualizarPersonalDTH();
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     const safeAddListener = (id, event, handler) => {
         const el = document.getElementById(id);
         if (el) el.addEventListener(event, handler);
     };
-<<<<<<< HEAD
-=======
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     document.querySelectorAll('#main-nav button[data-module]').forEach(button => {
         button.addEventListener('click', () => seleccionarModulo(button.dataset.module));
     });
     document.querySelectorAll('#sidebar button[data-panel]').forEach(button => {
-<<<<<<< HEAD
         button.addEventListener('click', () => {
             const panelId = button.dataset.panel;
             mostrarPanel(panelId);
@@ -2851,17 +2329,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeAddListener('btnBuscarPorOrden', 'click', buscarPorOrden);
     safeAddListener('btnBuscarPorRut', 'click', buscarPorRut);
     safeAddListener('btnAgregarCargo', 'click', agregarCargo);
-=======
-        button.addEventListener('click', () => mostrarPanel(button.dataset.panel));
-    });
-
-    safeAddListener('btnLogin', 'click', login);
-    safeAddListener('btnValidarOrden', 'click', validarNumeroOrden);
-    safeAddListener('btnBuscarPorOrden', 'click', buscarPorOrden);
-    safeAddListener('btnBuscarPorRut', 'click', buscarPorRut);
-    safeAddListener('btnAgregarCargo', 'click', agregarCargo);
-    safeAddListener('btnAgregarDpto', 'click', agregarDepartamento);
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     safeAddListener('btnCancelarEdicion', 'click', () => mostrarPanel('panel-lista-personal'));
     safeAddListener('btnResetFiltros', 'click', resetFiltros);
     safeAddListener('btnEnviarCorreo', 'click', enviarPorCorreo);
@@ -2876,7 +2343,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeAddListener('btnAplicarFiltrosReporte', 'click', aplicarFiltrosReporte);
     safeAddListener('btnLimpiarFiltrosReporte', 'click', limpiarFiltrosReporte);
     safeAddListener('btnExportarReporteProduccion', 'click', exportarReporteProduccion);
-<<<<<<< HEAD
     safeAddListener('btnBuscarColaborador', 'click', buscarColaborador);
     safeAddListener('btn-crear-seriado', 'click', () => mostrarFormularioCreacion('seriado'));
     safeAddListener('btn-crear-ferreteria', 'click', () => mostrarFormularioCreacion('ferreteria'));
@@ -2918,15 +2384,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') buscarColaborador();
         });
     }
-=======
-
-    const formNuevoIngreso = document.getElementById('form-nuevo-ingreso');
-    const formIngresoOrden = document.getElementById('form-ingreso-orden');
-    const formEditarEmpleado = document.getElementById('form-editar-empleado');
-    if (formNuevoIngreso) formNuevoIngreso.addEventListener('submit', guardarNuevoEmpleado);
-    if (formIngresoOrden) formIngresoOrden.addEventListener('submit', guardarOrden);
-    if (formEditarEmpleado) formEditarEmpleado.addEventListener('submit', guardarEdicionEmpleado);
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 
     const reportesRRHH = document.querySelector('#reportes-rrhh .report-buttons');
     if (reportesRRHH) {
@@ -2934,7 +2391,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.dataset.reportType) exportarExcelRRHH(e.target.dataset.reportType);
         });
     }
-<<<<<<< HEAD
 
     ['orden-rut', 'emp-rut', 'editar-rut'].forEach(id => {
         const el = document.getElementById(id);
@@ -2943,38 +2399,12 @@ document.addEventListener('DOMContentLoaded', () => {
             el.addEventListener('blur', (e) => validarRutInput(e.target));
         }
     });
-=======
-    // Formularios de Logística (evitar recarga)
-    ['form-ingreso-seriados', 'form-ingreso-no-seriados', 'form-asignacion', 'form-transferencia', 'form-devolucion'].forEach(id => {
-        const form = document.getElementById(id);
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                mostrarToast("Funcionalidad en desarrollo.", "info");
-            });
-        }
-    });
-
-    // Botón de Guía de Salida
-    const btnGuia = document.getElementById('btn-generar-guia');
-    if (btnGuia) {
-        btnGuia.addEventListener('click', () => {
-            mostrarToast("Generando guía de salida...", "info");
-        });
-    }
-    ['orden-rut', 'emp-rut', 'editar-rut'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('blur', (e) => validarRutInput(e.target));
-    });
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && document.getElementById('login-container').style.display !== 'none') {
             event.preventDefault();
             login();
         }
     });
-<<<<<<< HEAD
 
     function formatearRut(inputElement) {
         let valor = inputElement.value.replace(/[^0-9kK]/g, '').toLowerCase();
@@ -3260,6 +2690,3 @@ function mostrarConfirmacion(mensaje, callbackSi, callbackNo = () => {}) {
         callbackNo();
     };
 }
-=======
-});
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c

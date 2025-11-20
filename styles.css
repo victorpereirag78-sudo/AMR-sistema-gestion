@@ -476,7 +476,6 @@ input:checked + .slider:before { transform: translateX(22px); }
 }
 .lista-seriados-item input {
     flex: 1;
-<<<<<<< HEAD
 }
 
 #modulo-bienvenida {
@@ -614,6 +613,4 @@ input:checked + .slider:before {
 }
 .btn-link-orden:hover {
     color: #0056b3;
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 }

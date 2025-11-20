@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="styles.css">
     <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
@@ -17,37 +16,12 @@
 </head>
 <body>
     <div id="toast-container"></div>
-=======
-    <!-- Tu CSS original -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Librerías existentes -->
-    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- ===== NUEVAS LIBRERÍAS PARA LA TABLA DINÁMICA ===== -->
-    <!-- Dependencias: jQuery y jQuery UI -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-    <!-- PivotTable.js -->
-    <script src="https://cdn.jsdelivr.net/npm/pivottable@2.23.0/dist/pivot.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pivottable@2.23.0/dist/pivot.min.css">
-    <!-- ===== FIN DE NUEVAS LIBRERÍAS ===== -->
-</head>
-<body>
-    <div id="toast-container"></div>
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
     <div id="login-container">
         <div class="login-box">
             <h2>Validación de Usuario</h2>
             <input type="text" id="username" placeholder="Usuario">
             <input type="password" id="password" placeholder="Contraseña">
             <button id="btnLogin">Ingresar</button>
-<<<<<<< HEAD
             <p class="copyright">© 2025 ARM</p>
         </div>
     </div>
@@ -62,24 +36,6 @@
             <div class="header-logo">© 2025  Comercial Pool</div>
         </header>
     <div id="content-wrapper">
-=======
-            <p class="copyright">© 2025 Tu Empresa</p>
-        </div>
-    </div>
-
-    <div id="app-container" style="display: none;">
-        <header id="main-header">
-            <nav id="main-nav">
-                <button data-module="dth">DTH</button>
-                <button data-module="rrhh">RRHH</button>
-                <button data-module="avance">Reportes</button>
-                <button data-module="logistica">Logística</button>
-            </nav>
-            <div class="header-logo">© 2025 Tu Empresa</div>
-        </header>
-
-        <div id="content-wrapper">
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
             <aside id="sidebar">
                 <div id="submenu-dth" class="submenu">
                     <h2>DTH</h2>
@@ -92,33 +48,19 @@
                         <li><button data-panel="panel-buscar-rut">Buscar por rut</button></li>
                     </ul>
                 </div>
-<<<<<<< HEAD
-=======
-                
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="submenu-rrhh" class="submenu">
                     <h2>RRHH</h2>
                     <h3 class="submenu-group-title">Interno</h3>
                     <ul>
                         <li><button data-panel="panel-gestion-cargos">Cargos</button></li>
-<<<<<<< HEAD
-=======
-                        <li><button data-panel="panel-gestion-departamentos">Departamentos</button></li>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                     </ul>
                     <h3 class="submenu-group-title">Personal</h3>
                     <ul>
                         <li><button data-panel="panel-lista-personal">Personal</button></li>
                         <li><button data-panel="panel-nuevo-ingreso">Nuevos Ingresos</button></li>
-<<<<<<< HEAD
                         <li><button data-panel="panel-buscar-colaborador">Buscar Colaborador</button></li>
                     </ul>
                 </div>
-=======
-                    </ul>
-                </div>
-                
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="submenu-avance" class="submenu">
                     <h2>Reportes</h2>
                     <ul>
@@ -127,20 +69,11 @@
                         <li><button data-panel="reportes-rrhh">RRHH</button></li>
                     </ul>
                 </div>
-<<<<<<< HEAD
                 <div id="submenu-logistica" class="submenu">
                     <h2>Logística</h2>
                     <ul>
                         <li><button data-panel="panel-ingreso-seriados">Ingreso de Equipos</button></li>
                         <li><button data-panel="panel-ingreso-no-seriados">Ingreso de Tarjeta</button></li>
-=======
-
-                <div id="submenu-logistica" class="submenu">
-                    <h2>Logística</h2>
-                    <ul>
-                        <li><button data-panel="panel-ingreso-seriados">Ingreso Materiales Seriados</button></li>
-                        <li><button data-panel="panel-ingreso-no-seriados">Ingreso Materiales No Seriados</button></li>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                         <li><button data-panel="panel-asignacion-materiales">Asignación de Materiales</button></li>
                         <li><button data-panel="panel-transferencia">Transferencia de Materiales</button></li>
                         <li><button data-panel="panel-devolucion-equipos">Devolución de Equipos</button></li>
@@ -148,7 +81,6 @@
                         <li><button data-panel="panel-inventario">Inventario</button></li>
                         <li><button data-panel="panel-bodega-malos">Bodega Malos</button></li>
                         <li><button data-panel="panel-bodega-reversa">Bodega Reversa</button></li>
-<<<<<<< HEAD
                         <li><button data-panel="panel-creacion-articulos">Creación</button></li>
                         <li><button data-panel="panel-buscar-serie">Buscar Serie</button></li>
                         <li><button data-panel="panel-saldo-tecnico">Saldo Técnico</button></li>
@@ -161,24 +93,12 @@
                         <img id="imagen-modulo" src="" alt="Imagen del módulo" style="max-width: 90%; max-height: 90%; object-fit: contain; opacity: 0; transition: opacity 0.4s ease;">
                     </div>
                     <h2 id="titulo-modulo" style="margin-top: 1rem; opacity: 0; transition: opacity 0.4s ease; font-size: 1.5rem; color: #333;">Selecciona una opción del menú</h2>
-=======
-                    </ul>
-                </div>
-            </aside>
-
-            <main id="main-content">
-                <!-- Paneles existentes (no se modifican) -->
-                <div id="panel-bienvenida" class="content-panel active">
-                    <h1>Bienvenido al Sistema de Gestión</h1>
-                    <p>Seleccione una opción del menú para comenzar.</p>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 </div>
                 <div id="panel-avance" class="content-panel">
                     <h1>Reportes</h1>
                     <p>Seleccione una opción del menú lateral para generar reportes.</p>
                 </div>
                 <div id="panel-ingreso-cliente" class="content-panel">
-<<<<<<< HEAD
                     <h2 id="titulo-ingreso-orden">Ingreso Orden</h2>
                     <div class="form-container">
                         <div id="paso-1">
@@ -259,31 +179,6 @@
                                 <button type="submit">💾 Guardar Orden</button>
                                 <button type="button" id="btnCancelarIngreso" style="margin-left: 10px; background: #6c757d;">Cancelar</button>
                             </div>
-=======
-                    <h2>Ingreso Orden</h2>
-                    <div class="form-container">
-                        <div id="ingreso-paso-1">
-                            <div class="form-group">
-                                <label for="orden-numero">Número de Orden:</label>
-                                <input type="text" id="orden-numero" required>
-                                <button type="button" id="btnValidarOrden">Validar</button>
-                            </div>
-                        </div>
-                        <form id="form-ingreso-orden" style="display: none;">
-                            <div class="form-group"><label for="orden-rut">RUT:</label><input type="text" id="orden-rut" placeholder="Ej: 12345678-9" required></div>
-                            <div class="form-group"><label for="orden-nombre">Nombre Cliente:</label><input type="text" id="orden-nombre" required></div>
-                            <div class="form-group"><label for="orden-direccion">Dirección Cliente:</label><input type="text" id="orden-direccion" required></div>
-                            <div class="form-group"><label for="numeroContacto">Número de contacto:</label><input type="text" id="numeroContacto" placeholder="Ej: 912345678" required></div>
-                            <div class="form-group"><label for="orden-region">Región:</label><select id="orden-region" required></select></div>
-                            <div class="form-group"><label for="orden-comuna">Comuna:</label><select id="orden-comuna" required></select></div>
-                            <div class="form-group"><label for="orden-fecha">Fecha agenda:</label><input type="date" id="orden-fecha" required></div>
-                            <div class="form-group"><label for="orden-despacho">Despacho:</label><select id="orden-despacho" required></select></div>
-                            <div class="form-group"><label for="orden-tecnico">Técnico:</label><select id="orden-tecnico" required></select></div>
-                            <div class="form-group"><label for="orden-servicio">Servicio:</label><select id="orden-servicio" required></select></div>
-                            <div class="form-group"><label for="orden-sub">Sub Servicio:</label><select id="orden-sub" required></select></div>
-                            <div class="form-group"><label for="orden-observacion">Observación:</label><textarea id="orden-observacion"></textarea></div>
-                            <div class="form-group"><button type="submit">Guardar Orden</button></div>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                         </form>
                     </div>
                 </div>
@@ -360,21 +255,6 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
-=======
-                <div id="panel-gestion-departamentos" class="content-panel">
-                    <h2>Gestión de Departamentos</h2>
-                    <div class="form-container">
-                        <div class="form-group">
-                            <label for="nuevo-dpto-nombre">Nuevo Departamento:</label>
-                            <input type="text" id="nuevo-dpto-nombre" placeholder="Ej: Operaciones">
-                            <button id="btnAgregarDpto">Agregar</button>
-                        </div>
-                        <ul id="lista-departamentos" class="lista-gestion"></ul>
-                    </div>
-                </div>
-
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-lista-personal" class="content-panel">
                     <h2>Personal de la Empresa</h2>
                     <div class="tabla-container">
@@ -400,7 +280,6 @@
                             <div class="form-group"><label for="emp-rut">RUT:</label><input type="text" id="emp-rut" placeholder="Ej: 12345678-9" required></div>
                             <div class="form-group"><label for="emp-telefono">Teléfono:</label><input type="text" id="emp-telefono"></div>
                             <div class="form-group full-width"><label for="emp-direccion">Dirección:</label><input type="text" id="emp-direccion"></div>
-<<<<<<< HEAD
                             <div class="form-group"><label for="emp-region">Región:</label><input type="text" id="emp-region" placeholder="Ej: Los Lagos" required></div>
                             <div class="form-group"><label for="emp-comuna">Comuna:</label><input type="text" id="emp-comuna" placeholder="Ej: Osorno" required></div>
                             <div class="form-group"><label for="emp-fecha-nac">Fecha Nacimiento:</label><input type="date" id="emp-fecha-nac" required></div>
@@ -410,28 +289,12 @@
                             <div class="form-group" id="grupo-licencia-tecnico" style="display: none;">
                                 <label for="emp-fecha-vencimiento-licencia">Fecha vencimiento licencia de conducir:</label>
                                 <input type="date" id="emp-fecha-vencimiento-licencia" required>
-=======
-                            <div class="form-group"><label for="emp-region">Región:</label><select id="emp-region" required></select></div>
-                            <div class="form-group"><label for="emp-comuna">Comuna:</label><select id="emp-comuna" required></select></div>
-                            <div class="form-group"><label for="emp-fecha-nac">Fecha Nacimiento:</label><input type="date" id="emp-fecha-nac" required></div>
-                            <div class="form-group"><label for="emp-email">Email:</label><input type="email" id="emp-email"></div>
-                            <div class="form-group"><label for="emp-cargo">Cargo:</label><select id="emp-cargo" required></select></div>
-                            <div class="form-group"><label for="emp-dpto">Departamento:</label><select id="emp-dpto" required></select></div>
-                            <div class="form-group"><label for="emp-fecha-ingreso">Fecha Ingreso:</label><input type="date" id="emp-fecha-ingreso" required></div>
-                            <div class="form-group">
-                                <label for="emp-activo">Estado:</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="emp-activo" checked>
-                                    <span class="slider round"></span> Activo
-                                </label>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                             </div>
                             <div class="form-group full-width"><label for="emp-observacion">Observaciones:</label><textarea id="emp-observacion"></textarea></div>
                             <div class="form-group full-width"><button type="submit">Guardar Empleado</button></div>
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div id="panel-buscar-colaborador" class="content-panel">
                     <h2>Buscar Colaborador</h2>
                     <div class="form-container">
@@ -445,11 +308,6 @@
                 </div>
                 <div id="panel-editar-empleado" class="content-panel">
                     <h2>Editar Colaborador</h2>
-=======
-                
-                <div id="panel-editar-empleado" class="content-panel">
-                    <h2>Editar Empleado</h2>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                     <div class="form-container">
                         <form id="form-editar-empleado" class="form-grid">
                             <input type="hidden" id="editar-empleado-id">
@@ -460,7 +318,6 @@
                             <div class="form-group"><label for="editar-rut">RUT:</label><input type="text" id="editar-rut" required></div>
                             <div class="form-group"><label for="editar-telefono">Teléfono:</label><input type="text" id="editar-telefono"></div>
                             <div class="form-group full-width"><label for="editar-direccion">Dirección:</label><input type="text" id="editar-direccion"></div>
-<<<<<<< HEAD
                             <div class="form-group"><label for="editar-region">Región:</label><input type="text" id="editar-region" required></div>
                             <div class="form-group"><label for="editar-comuna">Comuna:</label><input type="text" id="editar-comuna" required></div>
                             <div class="form-group"><label for="editar-fecha-nac">Fecha Nacimiento:</label><input type="date" id="editar-fecha-nac" required></div>
@@ -471,23 +328,6 @@
                                 <label for="editar-fecha-vencimiento-licencia">Fecha vencimiento licencia de conducir:</label>
                                 <input type="date" id="editar-fecha-vencimiento-licencia"></div>
                                 <div class="form-group full-width"><label for="editar-observacion">Observaciones:</label><textarea id="editar-observacion"></textarea></div>
-=======
-                            <div class="form-group"><label for="editar-region">Región:</label><select id="editar-region" required></select></div>
-                            <div class="form-group"><label for="editar-comuna">Comuna:</label><select id="editar-comuna" required></select></div>
-                            <div class="form-group"><label for="editar-fecha-nac">Fecha Nacimiento:</label><input type="date" id="editar-fecha-nac" required></div>
-                            <div class="form-group"><label for="editar-email">Email:</label><input type="email" id="editar-email"></div>
-                            <div class="form-group"><label for="editar-cargo">Cargo:</label><select id="editar-cargo" required></select></div>
-                            <div class="form-group"><label for="editar-dpto">Departamento:</label><select id="editar-dpto" required></select></div>
-                            <div class="form-group"><label for="editar-fecha-ingreso">Fecha Ingreso:</label><input type="date" id="editar-fecha-ingreso" required></div>
-                            <div class="form-group">
-                                <label for="editar-activo">Estado:</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="editar-activo">
-                                    <span class="slider round"></span> Activo
-                                </label>
-                            </div>
-                            <div class="form-group full-width"><label for="editar-observacion">Observaciones:</label><textarea id="editar-observacion"></textarea></div>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                             <div class="form-group full-width">
                                 <button type="submit">Actualizar Empleado</button>
                                 <button type="button" id="btnCancelarEdicion" style="margin-left:10px; background:#6c757d;">Cancelar</button>
@@ -605,10 +445,6 @@
                             <button id="btnExportarReporteProduccion" class="btn-excel">📊 Exportar</button>
                         </div>
                         <div class="reportes-layout">
-<<<<<<< HEAD
-=======
-                            <!-- ===== CONTENEDOR MODIFICADO PARA LA TABLA DINÁMICA ===== -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                             <div class="tabla-container-reporte">
                                 <div id="pivot-table-container"></div>
                             </div>
@@ -618,16 +454,11 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-                <!-- === LOGÍSTICA: Ingreso Seriados === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-ingreso-seriados" class="content-panel">
                     <h2>Ingreso de Materiales Seriados</h2>
                     <div class="form-container">
                         <form id="form-ingreso-seriados">
                             <div class="form-group">
-<<<<<<< HEAD
                                 <label for="guia-seriados">N° de Guía:</label>
                                 <input type="text" id="guia-seriados" required>
                             </div>
@@ -643,29 +474,12 @@
                                 <label for="archivo-excel-seriados">Cargar Excel (2 columnas: Serie1, Serie2):</label>
                                 <input type="file" id="archivo-excel-seriados" accept=".xlsx, .xls" required>
                             </div>
-=======
-                                <label for="tipo-material-seriado">Tipo de Material:</label>
-                                <select id="tipo-material-seriado" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="decodificador">Decodificador</option>
-                                    <option value="control">Control Remoto</option>
-                                    <option value="cable-hdmi">Cable HDMI</option>
-                                    <!-- Agrega más según necesites -->
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad-seriados">Cantidad:</label>
-                                <input type="number" id="cantidad-seriados" min="1" required>
-                            </div>
-                            <div id="lista-seriados" class="mt-3"></div>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                             <div class="form-group full-width">
                                 <button type="submit">Registrar Ingreso</button>
                             </div>
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div id="panel-ingreso-no-seriados" class="content-panel">
                     <h2>Ingreso de Tarjetas</h2>
                     <div class="form-container">
@@ -685,26 +499,6 @@
                             <div class="form-group">
                                 <label for="archivo-excel-tarjetas">Cargar Excel (1 columna: Código):</label>
                                 <input type="file" id="archivo-excel-tarjetas" accept=".xlsx, .xls" required>
-=======
-
-                <!-- === LOGÍSTICA: Ingreso No Seriados === -->
-                <div id="panel-ingreso-no-seriados" class="content-panel">
-                    <h2>Ingreso de Materiales No Seriados</h2>
-                    <div class="form-container">
-                        <form id="form-ingreso-no-seriados">
-                            <div class="form-group">
-                                <label for="tipo-material-no-seriado">Tipo de Material:</label>
-                                <select id="tipo-material-no-seriado" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="cable-coaxial">Cable Coaxial</option>
-                                    <option value="fuente-poder">Fuente de Poder</option>
-                                    <option value="splitter">Splitter</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad-no-seriados">Cantidad:</label>
-                                <input type="number" id="cantidad-no-seriados" min="1" required>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                             </div>
                             <div class="form-group full-width">
                                 <button type="submit">Registrar Ingreso</button>
@@ -712,7 +506,6 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div id="panel-asignacion-materiales" class="content-panel">
                     <h2>Asignación de Materiales</h2>
                     <div class="form-container">
@@ -774,70 +567,6 @@
                         <button id="btn-transferir" style="display: none;" class="btn-excel">✅ Transferir Seleccionados</button>
                     </div>
                 </div>
-=======
-
-                <!-- === LOGÍSTICA: Asignación de Materiales === -->
-                <div id="panel-asignacion-materiales" class="content-panel">
-                    <h2>Asignación de Materiales</h2>
-                    <div class="form-container">
-                        <form id="form-asignacion">
-                            <div class="form-group">
-                                <label for="tecnico-asignacion">Técnico:</label>
-                                <select id="tecnico-asignacion" required></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="material-asignacion">Material:</label>
-                                <select id="material-asignacion" required></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad-asignacion">Cantidad:</label>
-                                <input type="number" id="cantidad-asignacion" min="1" required>
-                            </div>
-                            <div class="form-group full-width">
-                                <button type="submit">Asignar Material</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- === LOGÍSTICA: Transferencia === -->
-                <div id="panel-transferencia" class="content-panel">
-                    <h2>Transferencia de Materiales</h2>
-                    <div class="form-container">
-                        <form id="form-transferencia">
-                            <div class="form-group">
-                                <label for="bodega-origen">Bodega Origen:</label>
-                                <select id="bodega-origen" required>
-                                    <option value="principal">Bodega Principal</option>
-                                    <option value="malos">Bodega Malos</option>
-                                    <option value="reversa">Bodega Reversa</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="bodega-destino">Bodega Destino:</label>
-                                <select id="bodega-destino" required>
-                                    <option value="principal">Bodega Principal</option>
-                                    <option value="malos">Bodega Malos</option>
-                                    <option value="reversa">Bodega Reversa</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="material-transferencia">Material:</label>
-                                <select id="material-transferencia" required></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad-transferencia">Cantidad:</label>
-                                <input type="number" id="cantidad-transferencia" min="1" required>
-                            </div>
-                            <div class="form-group full-width">
-                                <button type="submit">Transferir</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- === LOGÍSTICA: Devolución de Equipos === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-devolucion-equipos" class="content-panel">
                     <h2>Devolución de Equipos</h2>
                     <div class="form-container">
@@ -864,11 +593,6 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-
-                <!-- === LOGÍSTICA: Guía de Salida === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-guia-salida" class="content-panel">
                     <h2>Guía de Salida</h2>
                     <div class="form-container">
@@ -876,11 +600,6 @@
                         <button id="btn-generar-guia" class="btn-excel">📄 Generar Guía</button>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-
-                <!-- === LOGÍSTICA: Inventario === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-inventario" class="content-panel">
                     <h2>Inventario General</h2>
                     <div class="tabla-container">
@@ -898,11 +617,6 @@
                         </table>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-
-                <!-- === LOGÍSTICA: Bodega Malos === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-bodega-malos" class="content-panel">
                     <h2>Bodega de Materiales en Mal Estado</h2>
                     <div class="tabla-container">
@@ -919,11 +633,6 @@
                         </table>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-
-                <!-- === LOGÍSTICA: Bodega Reversa === -->
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
                 <div id="panel-bodega-reversa" class="content-panel">
                     <h2>Bodega de Reversa</h2>
                     <div class="tabla-container">
@@ -940,7 +649,6 @@
                         </table>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div id="panel-creacion-articulos" class="content-panel">
                     <h2>Creación de Seriado</h2>
                     <div class="form-container">
@@ -1055,21 +763,14 @@
                     </form>
                 </div>
                 </div>
-=======
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
             </main>
         </div>
     </div>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<<<<<<< HEAD
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
     emailjs.init("jzFJsfyQK4_babi6V");
     </script>
     <script src="app.js"></script>
     </body>
-=======
-    <script src="app.js"></script>
-</body>
->>>>>>> d467c92fe7691a9bd1c52d661b7f86cf1d58b28c
 </html>
