@@ -128,23 +128,23 @@ function mostrarPanel(panelId) {
             let titulo = '';
             switch (moduloActivo) {
                 case 'dth':
-                    imgSrc = 'Parque-Chuyaca.jpg';
+                    imgSrc = 'img AMR/Parque-Chuyaca.jpg';
                     titulo = 'Operaciones de Terreno (DTH)';
                     break;
                 case 'rrhh':
-                    imgSrc = 'Iluminada.jpg';
+                    imgSrc = 'img AMR/Iluminada.jpg';
                     titulo = 'Recursos Humanos';
                     break;
                 case 'avance':
-                    imgSrc = 'Toro.jpg';
+                    imgSrc = 'img AMR/Toro.jpg';
                     titulo = 'Reportes y Análisis';
                     break;
                 case 'logistica':
-                    imgSrc = 'Plaza-Osorno.jpg';
+                    imgSrc = 'img AMR/Plaza-Osorno.jpg';
                     titulo = 'Gestión Logística';
                     break;
                 default:
-                    imgSrc = 'Osorno1.jpg';
+                    imgSrc = 'img AMR/Osorno1.jpg';
                     titulo = 'Bienvenido a Tu Empresa';
             }
             if (imagenModulo) {
