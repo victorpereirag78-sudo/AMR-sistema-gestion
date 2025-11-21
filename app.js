@@ -85,7 +85,7 @@ function login() {
     const imagenModulo = document.getElementById('imagen-modulo');
     const tituloModulo = document.getElementById('titulo-modulo');
     if (imagenModulo) {
-        imagenModulo.src = 'Volcan.jpg';
+        imagenModulo.src = 'img AMR/Volcan.jpg';
         imagenModulo.style.opacity = '1';
     }
     if (tituloModulo) {
