@@ -85,7 +85,7 @@ function login() {
     const imagenModulo = document.getElementById('imagen-modulo');
     const tituloModulo = document.getElementById('titulo-modulo');
     if (imagenModulo) {
-        imagenModulo.src = 'img AMR/Volcan.jpg';
+        imagenModulo.src = 'img-amr/Volcan.jpg';
         imagenModulo.style.opacity = '1';
     }
     if (tituloModulo) {
@@ -128,23 +128,23 @@ function mostrarPanel(panelId) {
             let titulo = '';
             switch (moduloActivo) {
                 case 'dth':
-                    imgSrc = 'img AMR/Parque-Chuyaca.jpg';
+                    imgSrc = 'img-amr/Parque-Chuyaca.jpg';
                     titulo = 'Operaciones de Terreno (DTH)';
                     break;
                 case 'rrhh':
-                    imgSrc = 'img AMR/Iluminada.jpg';
+                    imgSrc = 'img-amr/Iluminada.jpg';
                     titulo = 'Recursos Humanos';
                     break;
                 case 'avance':
-                    imgSrc = 'img AMR/Toro.jpg';
+                    imgSrc = 'img-amr/Toro.jpg';
                     titulo = 'Reportes y Análisis';
                     break;
                 case 'logistica':
-                    imgSrc = 'img AMR/Plaza-Osorno.jpg';
+                    imgSrc = 'img-amr/Plaza-Osorno.jpg';
                     titulo = 'Gestión Logística';
                     break;
                 default:
-                    imgSrc = 'img AMR/Osorno1.jpg';
+                    imgSrc = 'img-amr/Osorno1.jpg';
                     titulo = 'Bienvenido a Tu Empresa';
             }
             if (imagenModulo) {
